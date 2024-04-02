@@ -2,7 +2,7 @@
   var targetDiv = document.getElementById('askunali');
   if (!targetDiv) return;
 
-  var widgetHTML = /*HTML_CONTENT*/;
+  var widgetHTML = `{{WIDGET_HTML}}`;
 
   targetDiv.outerHTML = widgetHTML;
 })();

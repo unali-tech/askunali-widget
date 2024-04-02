@@ -20,10 +20,11 @@ gulp.task('inline-css', function() {
 
 gulp.task('inject-html', function() {
   var widgetHTML = fs.readFileSync('./dist/widget.html', 'utf8');
-  widgetHTML = widgetHTML.replace(/`/g, '\\`').replace(/\$/g, '\\$');
-  widgetHTML = widgetHTML.replace(/\n/g, '');
+  // Escape backticks in the HTML content
+  widgetHTML = widgetHTML.replace(/`/g, '\\`');
+  widgetHTML = JSON.stringify(widgetHTML).slice(1, -1); // Remove the extra quotes added by JSON.stringify
   return gulp.src('./src/js/widget.js')
-      .pipe(replace('/*HTML_CONTENT*/', `\`${widgetHTML}\``))
+      .pipe(replace('{{WIDGET_HTML}}', widgetHTML))
       .pipe(minify())
       .pipe(gulp.dest('dist'));
 });
