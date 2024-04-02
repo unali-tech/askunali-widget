@@ -19,11 +19,11 @@ gulp.task('inline-css', function() {
 });
 
 gulp.task('inject-html', function() {
-    var widgetHTML = fs.readFileSync('./dist/widget.html', 'utf8');
-    return gulp.src('./src/js/widget.js')
-        .pipe(replace('`', '`' + widgetHTML + '`'))
-        .pipe(minify())
-        .pipe(gulp.dest('dist'));
+  var widgetHTML = fs.readFileSync('./dist/widget.html', 'utf8');
+  return gulp.src('./src/js/widget.js')
+      .pipe(replace('`    `', '`' + widgetHTML + '`'))
+      .pipe(minify())
+      .pipe(gulp.dest('dist'));
 });
 
 gulp.task('clean', function() {
