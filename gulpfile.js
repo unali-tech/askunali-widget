@@ -20,9 +20,10 @@ gulp.task('inline-css', function() {
 
 gulp.task('inject-html', function() {
   var widgetHTML = fs.readFileSync('./dist/widget.html', 'utf8');
-  widgetHTML = JSON.stringify(widgetHTML);
+  widgetHTML = widgetHTML.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+  widgetHTML = widgetHTML.replace(/\n/g, '');
   return gulp.src('./src/js/widget.js')
-      .pipe(replace('`    `', widgetHTML))
+      .pipe(replace('/*HTML_CONTENT*/', `\`${widgetHTML}\``))
       .pipe(minify())
       .pipe(gulp.dest('dist'));
 });

@@ -1,14 +1,8 @@
-// my-library.js
 (function() {
-  // Check if the target div exists
   var targetDiv = document.getElementById('askunali');
   if (!targetDiv) return;
 
-  // Create the widget HTML
-  var widgetHTML = `
-    
-  `;
+  var widgetHTML = /*HTML_CONTENT*/;
 
-  // Replace the target div with the widget HTML
   targetDiv.outerHTML = widgetHTML;
 })();
