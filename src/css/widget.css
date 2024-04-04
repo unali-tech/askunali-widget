@@ -1,3 +1,7 @@
+#askunali-widget {
+  color: #303840
+}
+
 #askunali-widget .askunali-title {
   font-size: 5rem;
   line-height: 5rem;
@@ -63,6 +67,7 @@
   border-radius: 10px;
   min-height: 16.7rem;
   padding: 2rem 2rem 2rem 7rem;
+  margin-top: 2rem;
   font-size: 1.8rem;
   background: #F9FBFF;
 }
