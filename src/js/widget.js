@@ -137,6 +137,38 @@
       }
     `;
     document.head.appendChild(style);
+
+    editableDiv.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        submitQuestion();
+      }
+    });
+    
+    function submitQuestion() {
+      const question = editableDiv.textContent.trim();
+      if (question !== '') {
+        // Send the question to the API
+        fetch('https://unalihealth.com/ask_question', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${config.apiKey}`
+          },
+          body: JSON.stringify({ question: question })
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Display the answer in the answer box
+          const answerBox = document.getElementById('askunali-rag-answer');
+          placeholder.style.display = 'none';
+          answerBox.textContent = data.answer;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    }
   }
 
   addScript();

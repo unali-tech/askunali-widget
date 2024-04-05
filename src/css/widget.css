@@ -88,12 +88,6 @@
   height: 3.2rem;
 }
 
-#askunali-widget .askunali-submit-button {
-  display: none;
-  font-size: 1.8rem;
-  color: #303840;
-}
-
 #askunali-widget #rag-answer {
   text-align: left;
 }
