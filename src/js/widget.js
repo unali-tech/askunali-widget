@@ -1,8 +1,6 @@
 (function() {
-  // Get config
   var config = window.askUnaliConfig || {};
 
-  // Log api key
   if(!config.apiKey) {
     console.error('No API key provided');
     return;
@@ -58,13 +56,10 @@
       }
     });
 
-    // Inject CSS
     var style = document.createElement('style');
 
-    // Check for custom styles
     if(config.styles) {
 
-      // Border styles
       if(config.styles.borderColor) {
         style.innerHTML += `
           .askunali-question-input-container, 
@@ -83,7 +78,6 @@
         `;
       }
 
-      // Question box styles
       if(config.styles.questionBox) {
         if(config.styles.questionBox.backgroundColor) {
           style.innerHTML += `
@@ -101,7 +95,6 @@
         }
       }
 
-      // Answer box styles
       if(config.styles.answerBox) {
         if(config.styles.answerBox.backgroundColor) {
           style.innerHTML += `
@@ -148,7 +141,6 @@
     function submitQuestion() {
       const question = editableDiv.textContent.trim();
       if (question !== '') {
-        // Send the question to the API
         fetch('https://unalihealth.com/ask_question', {
           method: 'POST',
           headers: {
@@ -159,16 +151,30 @@
         })
         .then(response => response.json())
         .then(data => {
-          // Display the answer in the answer box
           const answerBox = document.getElementById('askunali-rag-answer');
           placeholder.style.display = 'none';
-          answerBox.textContent = data.answer;
+          answerBox.textContent = '';
+    
+          let currentText = '';
+          let index = 0;
+          const typingSpeed = 20;
+    
+          function typeAnswer() {
+            if (index < data.answer.length) {
+              currentText += data.answer.charAt(index);
+              answerBox.textContent = currentText;
+              index++;
+              setTimeout(typeAnswer, typingSpeed);
+            }
+          }
+    
+          typeAnswer();
         })
         .catch(error => {
           console.error('Error:', error);
         });
       }
-    }
+    }    
   }
 
   addScript();

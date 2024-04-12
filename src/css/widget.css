@@ -3,13 +3,13 @@
 }
 
 #askunali-widget .askunali-title {
-  font-size: 5rem;
-  line-height: 5rem;
+  font-size: 50px;
+  line-height: 50px;
 }
 
 #askunali-widget .askunali-subtitle {
-  font-size: 2rem;
-  margin-bottom: 3rem;
+  font-size: 20px;
+  margin-bottom: 30px;
 }
 
 #askunali-widget .askunali-question-input-container {
@@ -20,26 +20,26 @@
   border: 1px solid #D0DDE8;
   border-radius: 10px;
   height: auto;
-  min-height: 8.4rem;
+  min-height: 84px;
   background: white;
 }
 
 #askunali-widget .askunali-question-icon {
-  width:3rem;
-  height:3rem;
+  width:30px;
+  height:30px;
   position: absolute;
-  margin-left: 2rem;
+  margin-left: 20px;
 }
 
 #askunali-widget .askunali-question-input-area {
   flex-grow: 1;
-  line-height: 4rem;
+  line-height: 40px;
   background: none;
   border: none;
   outline: none;
   padding: 0;
-  margin: 0 2rem 0 7rem;
-  font-size: 1.8rem;
+  margin: 0 20px 0 70px;
+  font-size: 18px;
   color: inherit;
   font-family: inherit;
   resize: none;
@@ -65,27 +65,27 @@
   position: relative;
   border: 1px solid #D0DDE8;
   border-radius: 10px;
-  min-height: 16.7rem;
-  padding: 2rem 2rem 2rem 7rem;
-  margin-top: 2rem;
-  font-size: 1.8rem;
+  min-height: 167px;
+  padding: 20px 20px 20px 70px;
+  margin-top: 20px;
+  font-size: 18px;
   background: #F9FBFF;
 }
 
 #askunali-widget .askunali-rag-answer-placeholder {
   color: rgba(19, 19, 19, 0.4); 
   position: absolute; 
-  left: 7rem; 
-  top: 2.3rem;
+  left: 70px; 
+  top: 23px;
   cursor: default;
 }
 
 #askunali-widget .askunali-question-output-icon {
   position: absolute;
-  top: 2rem;
-  left: 2rem;
-  width: 3.2rem;
-  height: 3.2rem;
+  top: 20px;
+  left: 20px;
+  width: 32px;
+  height: 32px;
 }
 
 #askunali-widget #rag-answer {
