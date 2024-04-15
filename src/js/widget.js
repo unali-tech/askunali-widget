@@ -17,7 +17,7 @@
     const editableDiv = document.getElementById('askunali-question_input_div');
 
     const questionInputContainer = document.querySelector('.askunali-question-input-container');
-    const placeholder = document.querySelector('.askunali-rag-answer-placeholder');
+    const placeholder = document.querySelector('.askunali-answer-placeholder');
 
     function updatePlaceholder() {
       if (editableDiv.textContent.trim().length > 0) {
@@ -144,14 +144,16 @@
         fetch('https://unalihealth.com/ask_question', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${config.apiKey}`
+            'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ question: question })
+          body: JSON.stringify({
+            question: question,
+            api_key: config.apiKey
+          })
         })
         .then(response => response.json())
         .then(data => {
-          const answerBox = document.getElementById('askunali-rag-answer');
+          const answerBox = document.getElementById('askunali-answer');
           placeholder.style.display = 'none';
           answerBox.textContent = '';
     
@@ -161,11 +163,105 @@
     
           function typeAnswer() {
             if (index < data.answer.length) {
-              currentText += data.answer.charAt(index);
-              answerBox.textContent = currentText;
+              const currentChar = data.answer.charAt(index);
+              currentText += currentChar;
+              answerBox.innerHTML = highlightIngredients(currentText);
               index++;
               setTimeout(typeAnswer, typingSpeed);
+            } else {
+              showAdditionalElements();
             }
+          }
+          
+          function highlightIngredients(text) {
+            const ingredients = data.ingredients_data.map(item => item.ingredient_name);
+            const activities = data.activities_data.map(item => item.activity_name);
+            const names = [...ingredients, ...activities];
+          
+            names.forEach(name => {
+              const regex = new RegExp(`\\b${name}\\b`, 'gi');
+              text = text.replace(regex, `<a href="#" class="askunali-ingredient-link" style="color: #3366CC;">${name}</a>`);
+            });
+          
+            return text;
+          }
+          
+          function showAdditionalElements() {
+            const separator = document.getElementById('askunali-separator');
+            const sources = document.getElementById('askunali-sources');
+            const link = document.getElementById('askunali-link');
+          
+            setTimeout(() => {
+              separator.style.display = 'block';
+            }, 500);
+          
+            setTimeout(() => {
+              sources.style.display = 'flex';
+              updateSourcesLinks();
+            }, 1000);
+          
+            setTimeout(() => {
+              link.style.display = 'block';
+            }, 1500);
+          }
+          
+          function updateSourcesLinks() {
+            const sourcesContainer = document.getElementById('askunali-sources');
+            const totalSources = data.ingredients_data.length + data.activities_data.length;
+            
+            sourcesContainer.innerHTML = 'Sources: ';
+          
+            [...data.ingredients_data, ...data.activities_data].forEach((item, index) => {
+              const sourceLink = document.createElement('a');
+              sourceLink.classList.add('askunali-sources-count');
+              sourceLink.href = item.paper_url;
+              sourceLink.target = '_blank';
+              sourceLink.textContent = index + 1;
+              sourceLink.style.cssText = `
+                border: 1px solid #3C444C;
+                color: #004695;
+                border-radius: 50%;
+                width: 22px;
+                height: 22px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 8px;
+                font-size: 14px;
+                cursor: pointer;
+              `;
+              sourcesContainer.appendChild(sourceLink);
+            });
+          }
+          
+          function updateSourcesCount() {
+            const sourcesCount = document.getElementById('askunali-sources-count');
+            const totalSources = data.ingredients_data.length + data.activities_data.length;
+            sourcesCount.textContent = totalSources;
+          }
+          
+          answerBox.addEventListener('click', function(event) {
+            if (event.target.classList.contains('askunali-ingredient-link')) {
+              event.preventDefault();
+              const name = event.target.textContent;
+              const item = [...data.ingredients_data, ...data.activities_data].find(
+                item => item.ingredient_name === name || item.activity_name === name
+              );
+              if (item) {
+                const originalAnswer = answerBox.innerHTML;
+                answerBox.innerHTML = item.paper_summary;
+                showReturnButton(originalAnswer);
+              }
+            }
+          });
+          
+          function showReturnButton(originalAnswer) {
+            const returnButton = document.getElementById('askunali-return-button');
+            returnButton.style.display = 'block';
+            returnButton.onclick = function() {
+              answerBox.innerHTML = originalAnswer;
+              returnButton.style.display = 'none';
+            };
           }
     
           typeAnswer();

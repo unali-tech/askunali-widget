@@ -66,13 +66,13 @@
   border: 1px solid #D0DDE8;
   border-radius: 10px;
   min-height: 167px;
-  padding: 20px 20px 20px 70px;
+  padding: 20px 20px 70px 70px;
   margin-top: 20px;
   font-size: 18px;
   background: #F9FBFF;
 }
 
-#askunali-widget .askunali-rag-answer-placeholder {
+#askunali-widget .askunali-answer-placeholder {
   color: rgba(19, 19, 19, 0.4); 
   position: absolute; 
   left: 70px; 
@@ -90,4 +90,67 @@
 
 #askunali-widget #rag-answer {
   text-align: left;
+}
+
+#askunali-widget #askunali-sources {
+  align-items: center;
+
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+
+  font-size: 14px;
+}
+
+#askunali-widget #askunali-separator {
+  border-top: 1px solid #D0DDE8;
+  position: absolute;
+  bottom: 50px;
+  width: 96%;
+  left: 20px;
+}
+
+.askunali-sources-count {
+  border: 1px solid #004695;
+  color: #004695;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#askunali-widget #askunali-link a {
+  text-decoration: underline;
+  color: #303840;
+  font-size: 14px;
+
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+#askunali-separator,
+#askunali-sources,
+#askunali-link {
+  display: none;
+}
+
+#askunali-return-button {
+  display: none;
+  position: absolute;
+  right: 20px;
+  border: 1px solid #3C444C;
+  border-radius: 20px;
+  padding: 5px 20px;
+  bottom: 65px;
+  cursor: pointer;
+}
+
+.askunali-ingredient-link {
+  color: #3366CC;
 }
