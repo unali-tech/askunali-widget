@@ -129,6 +129,74 @@
         display: none;
       }
     `;
+
+    style.innerHTML += `
+      @keyframes moveDonut1 {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(0.5px, calc(-1 * 0.5px));
+        }
+      }
+
+      @keyframes moveDonut2 {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(0.5px, 0.5px);
+        }
+      }
+
+      @keyframes moveDonut3 {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(calc(-1 * 0.5px), 0.5px);
+        }
+      }
+
+      @keyframes moveDonut4 {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(calc(-1 * 0.5px), calc(-1 * 0.5px));
+        }
+      }
+
+      @keyframes rotateSVG {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .animate-svg .outer-donut-1 > g {
+        animation: moveDonut1 0.1s ease-in-out forwards;
+      }
+
+      .animate-svg .outer-donut-2 > g {
+        animation: moveDonut2 0.1s ease-in-out forwards;
+      }
+
+      .animate-svg .outer-donut-3 > g {
+        animation: moveDonut3 0.1s ease-in-out forwards;
+      }
+
+      .animate-svg .outer-donut-4 > g {
+        animation: moveDonut4 0.1s ease-in-out forwards;
+      }
+
+      .animate-svg.rotate > g {
+        animation: rotateSVG 3s linear infinite;
+        transform-origin: center;
+      }
+    `
     document.head.appendChild(style);
 
     editableDiv.addEventListener('keydown', function(event) {
@@ -141,9 +209,14 @@
     function submitQuestion() {
       const question = editableDiv.textContent.trim();
       if (question !== '') {
-        const outputIcon = document.getElementById('askunali-question-output-icon');
-        outputIcon.classList.add('loading');
+        const svg = document.getElementById('askunali-question-output-icon');
+        svg.classList.add('animate-svg');
+        setTimeout(() => {
+          svg.classList.add('rotate');
+        }, 100);
 
+        const startTime = performance.now();
+        console.log('Start time:', startTime);
         fetch('https://possibly-rational-skink.ngrok-free.app/ask-question', {
           method: 'POST',
           headers: {
@@ -156,7 +229,16 @@
         })
         .then(response => response.json())
         .then(data => {
-          outputIcon.classList.remove('loading');
+          const endTime = performance.now();
+          console.log('End time:', endTime);
+          console.log('Response time:', endTime - startTime, 'ms');
+          svg.classList.remove('rotate');
+          svg.classList.remove('animate-svg');
+          setTimeout(() => {
+            svg.querySelectorAll('g[class^="outer-donut-"] > g').forEach(donut => {
+              donut.style.transform = 'translate(0, 0)';
+            });
+          }, 0);
 
           const answerBox = document.getElementById('askunali-answer');
           placeholder.style.display = 'none';
@@ -256,7 +338,7 @@
           
             let sourcesText = 'Sources: ';
             let sourcesIndex = 0;
-            const typingSpeed = 50;
+            const typingSpeed = 30;
           
             function typeNextChar() {
               if (sourcesIndex < sourcesText.length) {
@@ -275,7 +357,7 @@
             const sourcesContainer = document.getElementById('askunali-sources');
             const sourceItems = [...data.ingredients_data, ...data.activities_data];
             let sourceIndex = 0;
-            const appendDelay = 200;
+            const appendDelay = 50;
           
             function appendNextSourceLink() {
               if (sourceIndex < sourceItems.length) {
@@ -358,7 +440,13 @@
         .catch(error => {
           console.error('Error:', error);
 
-          outputIcon.classList.remove('loading');
+          svg.classList.remove('rotate');
+          svg.classList.remove('animate-svg');
+          setTimeout(() => {
+            svg.querySelectorAll('g[class^="outer-donut-"] > g').forEach(donut => {
+              donut.style.transform = 'translate(0, 0)';
+            });
+          }, 0);
         });
       }
     }    
