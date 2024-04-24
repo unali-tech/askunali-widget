@@ -80,12 +80,10 @@
   cursor: default;
 }
 
-#askunali-widget .askunali-question-output-icon {
+#askunali-widget #askunali-question-output-icon {
   position: absolute;
   top: 20px;
   left: 20px;
-  width: 32px;
-  height: 32px;
 }
 
 #askunali-widget #rag-answer {
@@ -153,4 +151,86 @@
 
 .askunali-ingredient-link {
   color: #3366CC;
+}
+
+#askunali-shopping-container {
+  display: none;
+  justify-content: left;
+  align-items: center;
+
+  height: 35px;
+  width: 100%;
+
+  margin-top: 20px;
+}
+
+@keyframes moveDonut1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0.5px, calc(-1 * 0.5px));
+  }
+}
+
+@keyframes moveDonut2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0.5px, 0.5px);
+  }
+}
+
+@keyframes moveDonut3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(calc(-1 * 0.5px), 0.5px);
+  }
+}
+
+@keyframes moveDonut4 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(calc(-1 * 0.5px), calc(-1 * 0.5px));
+  }
+}
+
+@keyframes rotateSVG {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#askunali-question-output-icon .outer-donut-1 > g {
+  animation: moveDonut1 0.1s ease-in-out forwards;
+}
+
+#askunali-question-output-icon .outer-donut-2 > g {
+  animation: moveDonut2 0.1s ease-in-out forwards;
+}
+
+#askunali-question-output-icon .outer-donut-3 > g {
+  animation: moveDonut3 0.1s ease-in-out forwards;
+}
+
+#askunali-question-output-icon .outer-donut-4 > g {
+  animation: moveDonut4 0.1s ease-in-out forwards;
+}
+
+#askunali-question-output-icon.rotate > g {
+  animation: rotateSVG 3s linear infinite;
+  transform-origin: center;
+}
+
+#askunali-question-output-icon.loading > g {
+  animation: rotateSVG 3s linear infinite;
+  transform-origin: center;
 }
