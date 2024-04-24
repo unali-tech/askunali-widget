@@ -12,7 +12,8 @@ gulp.task('inline-css', function() {
             applyStyleTags: true,
             applyLinkTags: true,
             removeStyleTags: true,
-            removeLinkTags: true
+            removeLinkTags: true,
+            preserveMediaQueries: true
         }))
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest('dist'));

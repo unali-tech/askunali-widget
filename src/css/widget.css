@@ -80,12 +80,10 @@
   cursor: default;
 }
 
-#askunali-widget .askunali-question-output-icon {
+#askunali-widget #askunali-question-output-icon {
   position: absolute;
   top: 20px;
   left: 20px;
-  width: 32px;
-  height: 32px;
 }
 
 #askunali-widget #rag-answer {
@@ -153,4 +151,15 @@
 
 .askunali-ingredient-link {
   color: #3366CC;
+}
+
+#askunali-shopping-container {
+  display: none;
+  justify-content: left;
+  align-items: center;
+
+  height: 35px;
+  width: 100%;
+
+  margin-top: 20px;
 }
