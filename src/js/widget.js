@@ -205,10 +205,30 @@
         submitQuestion();
       }
     });
+
+    function clearAnswer() {
+      const answerBox = document.getElementById('askunali-answer');
+      const placeholder = document.querySelector('.askunali-answer-placeholder');
+      const separator = document.getElementById('askunali-separator');
+      const sources = document.getElementById('askunali-sources');
+      const link = document.getElementById('askunali-link');
+      const shoppingContainer = document.getElementById('askunali-shopping-links');
+    
+      answerBox.textContent = '';
+      placeholder.style.display = 'block';
+      separator.style.display = 'none';
+      sources.style.display = 'none';
+      sources.textContent = '';
+      link.style.display = 'none';
+      shoppingContainer.style.display = 'none';
+      shoppingContainer.innerHTML = '';
+    }    
     
     function submitQuestion() {
       const question = editableDiv.textContent.trim();
       if (question !== '') {
+        clearAnswer()
+
         const svg = document.getElementById('askunali-question-output-icon');
         svg.classList.add('animate-svg');
         setTimeout(() => {
@@ -278,7 +298,10 @@
             const sources = document.getElementById('askunali-sources');
             const link = document.getElementById('askunali-link');
 
-            appendShoppingContainer();
+            // If data.shopping_data.activities or data.shopping_data.ingredients is not empty
+            if (data.shopping_data.activities.length > 0 || data.shopping_data.ingredients.length > 0) {
+              appendShoppingContainer();
+            }
           
             setTimeout(() => {
               separator.style.display = 'block';
@@ -296,8 +319,6 @@
             shoppingContainer.style.display = 'flex';
           
             const shoppingItems = data.shopping_data.activities;
-          
-            console.log(data.shopping_data);
           
             let shoppingIndex = 0;
             const appendDelay = 200;

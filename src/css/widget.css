@@ -163,3 +163,16 @@
 
   margin-top: 20px;
 }
+
+#askunali-widget .askunali-shopping-container-count,
+#askunali-widget .askunali-ingredient-link,
+#askunali-widget .askunali-sources-count {
+  text-decoration: none;
+  outline: none;
+}
+
+#askunali-widget .askunali-shopping-container-count:focus,
+#askunali-widget .askunali-ingredient-link:focus,
+#askunali-widget .askunali-sources-count:focus {
+  outline: none;
+}
