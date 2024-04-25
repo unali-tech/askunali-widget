@@ -20,19 +20,27 @@ gulp.task('inline-css', function() {
 });
 
 gulp.task('inject-html', function() {
-  var widgetHTML = fs.readFileSync('./dist/widget.html', 'utf8');
-  // Escape backticks in the HTML content
-  widgetHTML = widgetHTML.replace(/`/g, '\\`');
-  widgetHTML = JSON.stringify(widgetHTML).slice(1, -1); // Remove the extra quotes added by JSON.stringify
-  return gulp.src('./src/js/widget.js')
-      .pipe(replace('{{WIDGET_HTML}}', widgetHTML))
-      .pipe(minify())
-      .pipe(gulp.dest('dist'));
+    var widgetHTML = fs.readFileSync('./dist/widget.html', 'utf8');
+    widgetHTML = widgetHTML.replace(/`/g, '\\`');
+    widgetHTML = JSON.stringify(widgetHTML).slice(1, -1);
+    return gulp.src('./src/js/widget.js')
+        .pipe(replace('{{WIDGET_HTML}}', widgetHTML))
+        .pipe(minify({
+            ext: {
+            min: '.min.js'
+            },
+            noSource: true,
+            mangle: {
+            reserved: ['askUnaliUpdateApiKey']
+            }
+        }))
+        .pipe(gulp.dest('dist'));
 });
+  
 
 gulp.task('clean', function() {
-  return gulp.src(['dist/widget.html', 'dist/widget.js'], {read: false})
-      .pipe(clean());
-});
+    return gulp.src(['dist/widget.html', 'dist/widget.js'], {read: false, allowEmpty: true})
+        .pipe(clean());
+  });  
 
 gulp.task('default', gulp.series('inline-css', 'inject-html', 'clean'));
