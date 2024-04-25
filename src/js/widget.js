@@ -272,16 +272,29 @@
           let currentText = '';
           let index = 0;
           const typingSpeed = 20;
+
+          const answerType = data.type;
+
+          // if the type is "basic" or "error", we justt type the answer with no additional element
+          // if the type is "enhanced", we keep the flow as it is
     
           function typeAnswer() {
             if (index < data.answer.length) {
               const currentChar = data.answer.charAt(index);
               currentText += currentChar;
-              answerBox.innerHTML = highlightIngredients(currentText);
+
+              if (answerType === 'enhanced') {
+                answerBox.innerHTML = highlightIngredients(currentText);
+              } else {
+                answerBox.textContent = currentText;
+              }
+
               index++;
               setTimeout(typeAnswer, typingSpeed);
             } else {
-              showAdditionalElements();
+              if (answerType === 'enhanced') {
+                showAdditionalElements();
+              }
             }
           }
           
@@ -302,7 +315,7 @@
             const separator = document.getElementById('askunali-separator');
             const sources = document.getElementById('askunali-sources');
             const link = document.getElementById('askunali-link');
-
+          
             // If data.shopping_data.activities or data.shopping_data.ingredients is not empty
             if (data.shopping_data.activities.length > 0 || data.shopping_data.ingredients.length > 0) {
               appendShoppingContainer();
