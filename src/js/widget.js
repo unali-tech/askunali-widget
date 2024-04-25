@@ -244,7 +244,7 @@
           },
           body: JSON.stringify({
             question: question,
-            api_key: config.api_key ? config.api_key : "placeholder"
+            api_key: config.api_key
           })
         })
         .then(response => response.json())
