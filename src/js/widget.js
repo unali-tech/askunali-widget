@@ -244,7 +244,7 @@
           },
           body: JSON.stringify({
             question: question,
-            api_key: window.askUnaliConfig.apiKey
+            api_key: config.api_key ? config.api_key : "placeholder"
           })
         })
         .then(response => response.json())
