@@ -3,7 +3,7 @@
 
   if (!config.apiKey) {
     console.warn('No API key provided. Requests will fail.');
-    config.apiKey = '876e2211-d704-4bbb-b716-18cd9279d616';
+    config.apiKey = 'a207c60c-a134-4029-b772-c8120c4d7bbd';
   }
 
   var targetDiv = document.getElementById('askunali');
