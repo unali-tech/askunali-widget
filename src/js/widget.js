@@ -1,9 +1,9 @@
 (function() {
   var config = window.askUnaliConfig || {};
 
-  if(!config.apiKey) {
-    console.error('No API key provided');
-    return;
+  if (!config.apiKey) {
+    console.warn('No API key provided. Requests will fail.');
+    config.apiKey = 'placeholder_api_key';
   }
 
   var targetDiv = document.getElementById('askunali');
@@ -237,14 +237,14 @@
 
         const startTime = performance.now();
         console.log('Start time:', startTime);
-        fetch('https://possibly-rational-skink.ngrok-free.app/ask-question', {
+        fetch('https://rag-api-e0qu.onrender.com/ask-question', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             question: question,
-            api_key: config.apiKey
+            api_key: window.askUnaliConfig.apiKey
           })
         })
         .then(response => response.json())
