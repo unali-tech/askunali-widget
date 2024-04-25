@@ -216,7 +216,8 @@
       const separator = document.getElementById('askunali-separator');
       const sources = document.getElementById('askunali-sources');
       const link = document.getElementById('askunali-link');
-      const shoppingContainer = document.getElementById('askunali-shopping-links');
+      const shoppingContainer = document.getElementById('askunali-shopping-container');
+      const shoppingLinks = document.getElementById('askunali-shopping-links');
     
       answerBox.textContent = '';
       placeholder.style.display = 'block';
@@ -225,7 +226,7 @@
       sources.textContent = '';
       link.style.display = 'none';
       shoppingContainer.style.display = 'none';
-      shoppingContainer.innerHTML = '';
+      shoppingLinks.innerHTML = '';
     }    
     
     function submitQuestion() {
