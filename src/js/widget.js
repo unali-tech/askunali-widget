@@ -340,7 +340,7 @@
                   border: 1px solid #004695;
                   color: #303840;
                   border-radius: 20px;
-                  padding: 0px 15px;
+                  padding: 5px 15px;
                   display: inline-flex;
                   justify-content: center;
                   align-items: center;
