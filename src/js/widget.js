@@ -237,6 +237,10 @@
 
         const startTime = performance.now();
         console.log('Start time:', startTime);
+
+        console.log('Config:', config);
+        console.log('This: ', this);
+
         fetch('https://rag-api-e0qu.onrender.com/ask-question', {
           method: 'POST',
           headers: {
