@@ -470,7 +470,13 @@
           }, 0);
         });
       }
-    }    
+    }
+
+    function updateApiKey(newApiKey) {
+      config.api_key = newApiKey;
+    }
+
+    window.askUnaliUpdateApiKey = updateApiKey;
   }
 
   addScript();
