@@ -27,7 +27,7 @@ gulp.task('inject-html', function() {
         .pipe(replace('{{WIDGET_HTML}}', widgetHTML))
         .pipe(minify({
             ext: {
-            min: '.min.js'
+                min: '.min.js'
             },
             noSource: true,
             mangle: {

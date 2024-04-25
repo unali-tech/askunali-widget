@@ -2,8 +2,8 @@
   var config = window.askUnaliConfig || {};
 
   if (!config.apiKey) {
-    console.warn('No API key provided. Requests will fail.');
-    config.apiKey = 'a207c60c-a134-4029-b772-c8120c4d7bbd';
+    console.warn('No API key provided. Requests will be limited.');
+    config.apiKey = 'default';
   }
 
   var targetDiv = document.getElementById('askunali');
@@ -18,6 +18,10 @@
 
     const questionInputContainer = document.querySelector('.askunali-question-input-container');
     const placeholder = document.querySelector('.askunali-answer-placeholder');
+
+    window.askUnaliUpdateApiKey = function(newApiKey) {
+      config.apiKey = newApiKey;
+    };
 
     function updatePlaceholder() {
       if (editableDiv.textContent.trim().length > 0) {
@@ -238,9 +242,6 @@
         const startTime = performance.now();
         console.log('Start time:', startTime);
 
-        console.log('Config:', config);
-        console.log('This: ', this);
-
         fetch('https://rag-api-e0qu.onrender.com/ask-question', {
           method: 'POST',
           headers: {
@@ -248,7 +249,7 @@
           },
           body: JSON.stringify({
             question: question,
-            api_key: config.api_key
+            api_key: config.apiKey
           })
         })
         .then(response => response.json())
@@ -475,12 +476,6 @@
         });
       }
     }
-
-    function updateApiKey(newApiKey) {
-      config.api_key = newApiKey;
-    }
-
-    window.askUnaliUpdateApiKey = updateApiKey;
   }
 
   addScript();
