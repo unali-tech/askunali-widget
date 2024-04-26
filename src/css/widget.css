@@ -68,7 +68,8 @@
   min-height: 167px;
   padding: 20px 20px 70px 70px;
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 25px;
   background: #F9FBFF;
 }
 
@@ -94,7 +95,7 @@
   align-items: center;
 
   position: absolute;
-  bottom: 10px;
+  bottom: 18px;
   left: 20px;
 
   font-size: 14px;
@@ -103,7 +104,7 @@
 #askunali-widget #askunali-separator {
   border-top: 1px solid #D0DDE8;
   position: absolute;
-  bottom: 50px;
+  bottom: 60px;
   width: 96%;
   left: 20px;
 }

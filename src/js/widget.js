@@ -439,7 +439,7 @@
               font-size: 14px;
             
               position: absolute;
-              bottom: 0px;
+              bottom: 10px;
               right: 20px;
             `;
           }
