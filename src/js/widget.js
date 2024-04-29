@@ -376,22 +376,25 @@
             const sourcesContainer = document.getElementById('askunali-sources');
             const totalSources = data.ingredients_data.length + data.activities_data.length;
           
-            let sourcesText = 'Sources: ';
-            let sourcesIndex = 0;
-            const typingSpeed = 30;
+            if (totalSources > 0) {
+              let sourcesText = 'Sources: ';
+              let sourcesIndex = 0;
+              const typingSpeed = 30;
           
-            function typeNextChar() {
-              if (sourcesIndex < sourcesText.length) {
-                sourcesContainer.innerHTML += sourcesText.charAt(sourcesIndex);
-                sourcesIndex++;
-                setTimeout(typeNextChar, typingSpeed);
-              } else {
-                appendSourceLinks();
+              function typeNextChar() {
+                if (sourcesIndex < sourcesText.length) {
+                  sourcesContainer.innerHTML += sourcesText.charAt(sourcesIndex);
+                  sourcesIndex++;
+                  setTimeout(typeNextChar, typingSpeed);
+                } else {
+                  appendSourceLinks();
+                }
               }
-            }
           
-            typeNextChar();
+              typeNextChar();
+            }
           }
+          
           
           function appendSourceLinks() {
             const sourcesContainer = document.getElementById('askunali-sources');
