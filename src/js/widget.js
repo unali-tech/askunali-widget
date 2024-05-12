@@ -243,7 +243,7 @@
         const startTime = performance.now();
         console.log('Start time:', startTime);
 
-        fetch('https://rag-api-e0qu.onrender.com/ask-question', {
+        fetch('https://rag-api-e0qu.onrender.com/ask_question', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
