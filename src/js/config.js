@@ -22,6 +22,14 @@ function getConfig() {
   };
 }
 
+function resetWidget() {
+  const questionInput = document.getElementById('askunali-question_input_div');
+  questionInput.textContent = '';
+  questionInput.classList.remove('not-empty');
+
+  clearAnswer();
+} 
+
 function updateApiKey(newApiKey) {
   window.askUnaliConfig = {
     ...window.askUnaliConfig,
@@ -29,4 +37,3 @@ function updateApiKey(newApiKey) {
   };
   resetWidget();
 }
-

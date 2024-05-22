@@ -124,15 +124,6 @@ async function initWidget() {
         });
     }
   }
-  
-
-  function resetWidget() {
-    const questionInput = document.getElementById('askunali-question_input_div');
-    questionInput.textContent = '';
-    questionInput.classList.remove('not-empty');
-  
-    clearAnswer();
-  }  
 
   function clearAnswer() {
     answerContainer.innerHTML = '';

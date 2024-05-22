@@ -1,13 +1,5 @@
 async function fetchAnswer(question) {
   const config = getConfig();
-  const cacheKey = `answer_${question}`;
-
-  // Check if the answer is already downloaded
-  const cachedAnswer = localStorage.getItem(cacheKey);
-  if (cachedAnswer) {
-    console.log('Using cached answer');
-    return JSON.parse(cachedAnswer);
-  }
 
   try {
     const response = await fetch('https://rag-api-e0qu.onrender.com/ask_question', {
@@ -27,9 +19,6 @@ async function fetchAnswer(question) {
 
     const data = await response.json();
 
-    // Store the answer in localStorage
-    localStorage.setItem(cacheKey, JSON.stringify(data));
-
     return data;
   } catch (error) {
     console.error('Error in fetchAnswer:', error);
@@ -38,6 +27,15 @@ async function fetchAnswer(question) {
 }
 
 async function fetchSuggestedQuestions(apiKey) {
+  const defaultQuestions = [
+    'How to manage knee pain?',
+    'Is ginseng good for energy?',
+    'Can acupuncture help with migraine?',
+    'Type of yoga for anxiety?',
+    'Child constipation, what to do?',
+    'What is AskUnali?'
+  ];
+
   try {
     const response = await fetch(`https://xybo-itpz-j8ne.p7.xano.io/api:pfjomY_8/get_suggested_questions?widget_api_key=${apiKey}`, {
       method: 'GET',
@@ -47,14 +45,20 @@ async function fetchSuggestedQuestions(apiKey) {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      console.error(`HTTP error! status: ${response.status}`);
+      return defaultQuestions;
     }
 
     const data = await response.json();
+
+    if (data.length === 0) {
+      console.warn('Empty response from fetchSuggestedQuestions API. Falling back to default questions.');
+      return defaultQuestions;
+    }
+
     return data;
   } catch (error) {
     console.error('Error in fetchSuggestedQuestions:', error);
-    throw error;
+    return defaultQuestions;
   }
 }
-
