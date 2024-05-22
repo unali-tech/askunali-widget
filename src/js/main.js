@@ -88,7 +88,14 @@ function loadAnimationStyles() {
   document.head.appendChild(extraStyles);
 }
 
+
+let widgetInitialized = false;
+
 function init() {
+  if (widgetInitialized) {
+    return;
+  }
+
   const config = getConfig();
 
   if (!config.apiKey) {
@@ -111,7 +118,10 @@ function init() {
   
   window.askUnaliResetWidget = function() {
     resetWidget();
-  };  
+  };
+
+  // Set the flag variable to true after initialization
+  widgetInitialized = true;
 }
 
 init();

@@ -158,7 +158,6 @@ async function initWidget() {
     }
   }
   
-  
   function displayEnhancedAnswer(answer, ingredients, activities, onComplete) {
     const names = [...ingredients.map(item => item.ingredient_name), ...activities.map(item => item.activity_name)];
     let currentText = '';
