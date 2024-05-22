@@ -51,7 +51,7 @@ async function fetchSuggestedQuestions(apiKey) {
 
     const data = await response.json();
 
-    if (data.length === 0) {
+    if (data && data.length === 0) {
       console.warn('Empty response from fetchSuggestedQuestions API. Falling back to default questions.');
       return defaultQuestions;
     }

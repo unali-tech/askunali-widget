@@ -24,10 +24,15 @@ async function initWidget() {
 
   try {
     const response = await fetchSuggestedQuestions(config.apiKey);
-    displaySuggestedQuestions(response.suggested_questions);
+    if (response && response.suggested_questions) {
+      displaySuggestedQuestions(response.suggested_questions);
+    } else {
+      console.warn('Unexpected response format from fetchSuggestedQuestions API.');
+    }
   } catch (error) {
     console.error('Error fetching suggested questions:', error);
   }
+  
 
   function handleQuestionInput() {
     if (questionInput.textContent.trim().length > 0) {
@@ -261,8 +266,11 @@ function displaySuggestedQuestions(questions) {
   const suggestionContainer = document.getElementById('askunali-question-suggestions-container');
   suggestionContainer.innerHTML = '';
 
-  questions.forEach(question => {
-    const suggestionElement = createElement('div', 'askunali-question-suggestion', question);
-    appendElement(suggestionContainer, suggestionElement);
-  });
+  if (questions) {
+    questions.forEach(question => {
+      const suggestionElement = createElement('div', 'askunali-question-suggestion', question);
+      appendElement(suggestionContainer, suggestionElement);
+    });
+  }
 }
+
