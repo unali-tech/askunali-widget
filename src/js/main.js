@@ -88,19 +88,20 @@ function loadAnimationStyles() {
   document.head.appendChild(extraStyles);
 }
 
-
+// flag variable
 let widgetInitialized = false;
 
 function init() {
+  // Check if the widget has already been initialized
   if (widgetInitialized) {
     return;
   }
 
   const config = getConfig();
 
-  if (!config.apiKey) {
-    console.warn('No API key provided. Requests will be limited.');
-    config.apiKey = 'default';
+  if (!config.apiKey || config.apiKey === 'init') {
+    console.warn('API key is empty or set to "init". Waiting for a valid API key.');
+    return;
   }
 
   const targetDiv = document.getElementById('askunali');
@@ -113,14 +114,19 @@ function init() {
   loadAnimationStyles();
 
   window.askUnaliUpdateApiKey = function(newApiKey) {
-    updateApiKey(newApiKey);
+    if (newApiKey && newApiKey !== 'init') {
+      updateApiKey(newApiKey);
+      if (!widgetInitialized) {
+        init();
+      }
+    }
   };
   
   window.askUnaliResetWidget = function() {
     resetWidget();
   };
 
-  // Set the flag variable to true after initialization
+  // flag variable to true after init
   widgetInitialized = true;
 }
 
