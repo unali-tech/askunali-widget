@@ -130,16 +130,6 @@ async function initWidget() {
     }
   }
 
-  function clearAnswer() {
-    answerContainer.innerHTML = '';
-    originalAnswer = '';
-    hideElement(sourcesList);
-    hideElement(linkElement);
-    hideElement(returnButton);
-    hideElement(shoppingContainer);
-    shoppingLinks.innerHTML = '';
-  }
-
   function displayAnswer(data) {
     const answerType = data.type;
     const answer = data.answer;
