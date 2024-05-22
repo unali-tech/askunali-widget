@@ -1,4 +1,4 @@
-const defaultConfig = {
+const askUnaliDefaultConfig = {
   apiKey: 'default',
   styles: {
     borderColor: null,
@@ -17,7 +17,7 @@ const defaultConfig = {
 function getConfig() {
   const userConfig = window.askUnaliConfig || {};
   return {
-    ...defaultConfig,
+    ...askUnaliDefaultConfig,
     ...userConfig,
   };
 }
