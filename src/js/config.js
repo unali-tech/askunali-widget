@@ -30,21 +30,36 @@ function clearAnswer() {
   const shoppingContainer = document.getElementById('askunali-shopping-container');
   const shoppingLinks = document.getElementById('askunali-shopping-links');
 
-  answerContainer.innerHTML = '';
-  hideElement(sourcesList);
-  hideElement(linkElement);
-  hideElement(returnButton);
-  hideElement(shoppingContainer);
-  shoppingLinks.innerHTML = '';
+  if (answerContainer) {
+    answerContainer.innerHTML = '';
+  }
+  if (sourcesList) {
+    hideElement(sourcesList);
+  }
+  if (linkElement) {
+    hideElement(linkElement);
+  }
+  if (returnButton) {
+    hideElement(returnButton);
+  }
+  if (shoppingContainer) {
+    hideElement(shoppingContainer);
+  }
+  if (shoppingLinks) {
+    shoppingLinks.innerHTML = '';
+  }
 }
 
 function resetWidget() {
   const questionInput = document.getElementById('askunali-question_input_div');
-  questionInput.textContent = '';
-  questionInput.classList.remove('not-empty');
+  if (questionInput) {
+    questionInput.textContent = '';
+    questionInput.classList.remove('not-empty');
+  }
 
   clearAnswer();
 }
+
 
 function updateApiKey(newApiKey) {
   window.askUnaliConfig = {
