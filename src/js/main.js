@@ -112,16 +112,14 @@ function init() {
 
   const config = getConfig();
 
-  if (!config.apiKey || config.apiKey === 'init') {
-    console.warn('API key is empty or set to "init". Waiting for a valid API key.');
-    return;
-  }
-
-  const targetDiv = document.getElementById('askunali');
-  if (!targetDiv) return;
-
   const widgetHTML = `{{WIDGET_HTML}}`;
   targetDiv.outerHTML = widgetHTML;
+
+  const targetDiv = document.getElementById('askunali');
+  if (!targetDiv) {
+    console.warn('Could not find the target div for the widget.');
+    return;
+  }
 
   initWidget();
   loadAnimationStyles();
