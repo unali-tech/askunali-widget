@@ -110,16 +110,15 @@ function init() {
     return;
   }
 
-  const config = getConfig();
-
   const widgetHTML = `{{WIDGET_HTML}}`;
-  targetDiv.outerHTML = widgetHTML;
 
   const targetDiv = document.getElementById('askunali');
   if (!targetDiv) {
     console.warn('Could not find the target div for the widget.');
     return;
   }
+
+  targetDiv.outerHTML = widgetHTML;
 
   initWidget();
   loadAnimationStyles();
