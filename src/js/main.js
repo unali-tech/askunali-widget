@@ -91,6 +91,19 @@ function loadAnimationStyles() {
 // flag variable
 let widgetInitialized = false;
 
+window.askUnaliUpdateApiKey = function(newApiKey) {
+  if (newApiKey && newApiKey !== 'init') {
+    updateApiKey(newApiKey);
+    if (!widgetInitialized) {
+      init();
+    }
+  }
+};
+
+window.askUnaliResetWidget = function() {
+  resetWidget();
+};
+
 function init() {
   // Check if the widget has already been initialized
   if (widgetInitialized) {
@@ -112,19 +125,6 @@ function init() {
 
   initWidget();
   loadAnimationStyles();
-
-  window.askUnaliUpdateApiKey = function(newApiKey) {
-    if (newApiKey && newApiKey !== 'init') {
-      updateApiKey(newApiKey);
-      if (!widgetInitialized) {
-        init();
-      }
-    }
-  };
-  
-  window.askUnaliResetWidget = function() {
-    resetWidget();
-  };
 
   // flag variable to true after init
   widgetInitialized = true;
