@@ -24,11 +24,7 @@ async function initWidget() {
 
   try {
     const response = await fetchSuggestedQuestions(config.apiKey);
-    if (response && response.suggested_questions) {
-      displaySuggestedQuestions(response.suggested_questions);
-    } else {
-      console.warn('Unexpected response format from fetchSuggestedQuestions API.');
-    }
+    displaySuggestedQuestions(response);
   } catch (error) {
     console.error('Error fetching suggested questions:', error);
   }
