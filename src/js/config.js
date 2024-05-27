@@ -1,5 +1,5 @@
-if (typeof askUnaliDefaultConfig === 'undefined') {
-  var askUnaliDefaultConfig = {
+if (typeof window.askUnaliDefaultConfig === 'undefined') {
+  window.askUnaliDefaultConfig = {
     apiKey: 'default',
     styles: {
       borderColor: null,
