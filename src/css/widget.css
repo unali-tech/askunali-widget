@@ -55,7 +55,7 @@
   padding: var(--spacing-base) calc(var(--spacing-base) * 1.2);
   min-height: calc(1rem * 6);
   margin-top: calc(var(--spacing-base) * 1.5);
-  background-color: white;
+  background-color: transparent;
 
   border-radius: 4px 4px 0 0;
   border-bottom: none;
@@ -67,7 +67,7 @@
 }
 
 #askunali-widget .askunali-question-output-container-bottom {
-  background-color: white;
+  background-color: transparent;
 
   border: 1px solid var(--color-border);
   border-top: 1px solid #E1EAF1;

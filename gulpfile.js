@@ -48,25 +48,28 @@ gulp.task('inject-html', function() {
 
 gulp.task('bundle-js', function() {
     return gulp.src([
-        './src/js/config.js',
-        './src/js/utils.js',
-        './src/js/api.js',
-        './src/js/animation.js',
-        './src/js/dom.js',
-        './dist/js/main.js'
+      './src/js/config.js',
+      './src/js/utils.js',
+      './src/js/api.js',
+      './src/js/animation.js',
+      './src/js/custom-styles.js',
+      './src/js/dom.js',
+      './dist/js/main.js'
     ])
     .pipe(order([
-        'config.js',
-        'utils.js',
-        'api.js',
-        'animation.js',
-        'dom.js',
-        'main.js'
+      'config.js',
+      'utils.js',
+      'api.js',
+      'animation.js',
+      'custom-styles.js',
+      'dom.js',
+      'main.js'
     ]))
     .pipe(concat('widget.min.js', {newLine: ';'}))
     .pipe(uglify())
     .pipe(gulp.dest('dist'));
-});
+  });
+  
 
 gulp.task('clean', function() {
     return gulp.src(['dist/widget.html', 'dist/js'], {read: false, allowEmpty: true})
