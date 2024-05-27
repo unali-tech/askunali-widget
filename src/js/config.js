@@ -58,6 +58,26 @@ function resetWidget() {
   }
 
   clearAnswer();
+
+  // Show the suggestion container
+  const suggestionContainer = document.getElementById('askunali-question-suggestions-container');
+  if (suggestionContainer) {
+    suggestionContainer.style.display = 'block';
+  }
+
+  // Reset the styles of the output container
+  const outputContainer = document.querySelector('.askunali-question-output-container');
+  if (outputContainer) {
+    outputContainer.style.border = '1px solid #D0DDE8';
+    outputContainer.style.borderBottom = '1px solid #D0DDE8';
+  }
+
+  // Reset the styles of the bottom container
+  const bottomContainer = document.querySelector('.askunali-question-output-container-bottom');
+  if (bottomContainer) {
+    bottomContainer.style.height = '0';
+    bottomContainer.style.border = 'none';
+  }
 }
 
 
