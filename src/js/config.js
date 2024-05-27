@@ -1,18 +1,20 @@
-const askUnaliDefaultConfig = {
-  apiKey: 'default',
-  styles: {
-    borderColor: null,
-    borderRadius: null,
-    questionBox: {
-      backgroundColor: null,
-      fontColor: null,
+if (typeof askUnaliDefaultConfig === 'undefined') {
+  var askUnaliDefaultConfig = {
+    apiKey: 'default',
+    styles: {
+      borderColor: null,
+      borderRadius: null,
+      questionBox: {
+        backgroundColor: null,
+        fontColor: null,
+      },
+      answerBox: {
+        backgroundColor: null,
+        fontColor: null,
+      },
     },
-    answerBox: {
-      backgroundColor: null,
-      fontColor: null,
-    },
-  },
-};
+  };
+}
 
 function getConfig() {
   const userConfig = window.askUnaliConfig || {};
