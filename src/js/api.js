@@ -51,14 +51,15 @@ async function fetchSuggestedQuestions(apiKey) {
 
     const data = await response.json();
 
-    if (!Array.isArray(data)) {
+    if (!Array.isArray(data.suggested_questions)) {
       console.error('Unexpected response format from fetchSuggestedQuestions API.');
       return defaultQuestions;
     }
 
-    return data;
+    return data.suggested_questions;
   } catch (error) {
     console.error('Error in fetchSuggestedQuestions:', error);
     return defaultQuestions;
   }
 }
+
