@@ -12,9 +12,9 @@
 
   function loadAnimationStyles() {
     const extraStyles = document.createElement('style');
-    extraStyles.innerHTML = animationStyles;
+    extraStyles.innerHTML = window.askUnaliAnimationStyles;
     document.head.appendChild(extraStyles);
-  }
+  }  
 
   function init(config) {
     const widgetHTML = `{{WIDGET_HTML}}`;
