@@ -51,8 +51,8 @@ async function fetchSuggestedQuestions(apiKey) {
 
     const data = await response.json();
 
-    if (data && data.length === 0) {
-      console.warn('Empty response from fetchSuggestedQuestions API. Falling back to default questions.');
+    if (!Array.isArray(data)) {
+      console.error('Unexpected response format from fetchSuggestedQuestions API.');
       return defaultQuestions;
     }
 
