@@ -68,7 +68,7 @@ gulp.task('bundle-js', function() {
     .pipe(concat('widget.min.js', {newLine: ';'}))
     .pipe(uglify())
     .pipe(gulp.dest('dist'));
-  });
+  });  
   
 
 gulp.task('clean', function() {

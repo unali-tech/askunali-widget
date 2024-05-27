@@ -1,4 +1,4 @@
-const animationStyles = `
+window.askUnaliAnimationStyles = `
   #askunali-widget .askunali-question-input-area::before {
     content: attr(data-placeholder);
     display: block;
