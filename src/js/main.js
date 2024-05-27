@@ -2,7 +2,14 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, 
-   global.AskUnaliWidget = global.AskUnaliWidget || factory());
+   global.AskUnaliWidget = (function() {
+     var AskUnaliWidget = factory();
+     return {
+       init: AskUnaliWidget.init,
+       updateApiKey: AskUnaliWidget.updateApiKey,
+       resetWidget: AskUnaliWidget.resetWidget,
+     };
+   })());
 })(this, (function () {
   'use strict';
 
