@@ -42,7 +42,7 @@ async function fetchSuggestedQuestions(apiKey) {
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    });Ca
 
     if (!response.ok) {
       console.error(`HTTP error! status: ${response.status}`);
