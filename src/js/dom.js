@@ -1,5 +1,5 @@
 async function initWidget() {
-  const config = getConfig();
+  const config = window.askUnaliFinalConfig;
   const questionInput = document.getElementById('askunali-question_input_div');
   const questionInputContainer = document.querySelector('.askunali-question-input-container');
   const answerContainer = document.getElementById('askunali-answer');
@@ -23,10 +23,14 @@ async function initWidget() {
   clearButtonContainer.addEventListener('click', handleClearButtonClick);
 
   try {
-    const response = await fetchSuggestedQuestions(config.apiKey);
-    displaySuggestedQuestions(response);
+    const [suggestedQuestions, widgetStyles] = await Promise.all([
+      fetchSuggestedQuestions(config.apiKey),
+      fetchWidgetStyles(config.apiKey)
+    ]);
+    displaySuggestedQuestions(suggestedQuestions);
+    applyStyles(widgetStyles);
   } catch (error) {
-    console.error('Error fetching suggested questions:', error);
+    console.error('Error fetching data:', error);
   }
   
 
@@ -93,17 +97,28 @@ async function initWidget() {
   
       // Hide the suggestion container
       suggestionContainer.style.display = 'none';
-  
+
+      // Get the config and styles
+      const { styles } = window.askUnaliFinalConfig;
+      const { border_radius } = styles;
+
+      // Apply styles to the question output container
+      applyQuestionOutputStyles(styles);
+        
+      console.log(border_radius)
       // Modify the styles of the output container
       const outputContainer = document.querySelector('.askunali-question-output-container');
       outputContainer.style.border = '1px solid var(--color-border)';
       outputContainer.style.borderBottom = 'none';
-  
+      outputContainer.style.setProperty('border-radius', `${border_radius}px ${border_radius}px 0 0`);
+
       // Modify the styles of the bottom container
       const bottomContainer = document.querySelector('.askunali-question-output-container-bottom');
-      bottomContainer.style.height = '10px';
+      bottomContainer.style.height = `${border_radius}px`;
       bottomContainer.style.border = '1px solid var(--color-border)';
       bottomContainer.style.borderTop = 'none';
+      bottomContainer.style.setProperty('border-radius', `0 0 ${border_radius}px ${border_radius}px`);
+
   
       const startTime = getTimestamp();
       console.log('Start time:', startTime);
@@ -124,7 +139,7 @@ async function initWidget() {
           displayErrorMessage();
         });
     }
-  }
+  }  
 
   function displayAnswer(data) {
     const answerType = data.type;

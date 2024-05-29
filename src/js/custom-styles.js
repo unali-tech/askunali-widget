@@ -2,8 +2,9 @@ window.askUnaliAnimationStyles = `
   #askunali-widget .askunali-question-input-area::before {
     content: attr(data-placeholder);
     display: block;
-    color: rgba(19, 19, 19, 0.4);
-  }
+    color: var(--question-font-color, rgba(19, 19, 19, 0.4));
+    background-color: var(--question-background-color, transparent);
+  } 
 
   #askunali-widget .askunali-question-input-area:focus::before {
     content: none;

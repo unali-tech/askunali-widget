@@ -59,3 +59,74 @@ function getTimestamp() {
 function formatTime(time) {
   return time.toFixed(2) + ' ms';
 }
+
+function applyStyles(styles) {
+  if (!styles) {
+    console.warn('Widget styles not found.');
+    return;
+  }
+
+  const {
+    border_color,
+    border_radius,
+    question_font_color,
+    question_background_color,
+    answer_font_color,
+    answer_background_color,
+  } = styles;
+
+  const widget = document.getElementById('askunali-widget');
+  if (border_color) {
+    widget.style.setProperty('--color-border', border_color);
+  }
+
+  const questionInputContainer = document.querySelector('.askunali-question-input-container');
+  if (question_font_color) {
+    questionInputContainer.style.color = question_font_color;
+  }
+  if (question_background_color) {
+    questionInputContainer.style.backgroundColor = question_background_color;
+  }
+  if (border_radius !== undefined) {
+    questionInputContainer.style.borderRadius = `${border_radius}px`;
+  }
+
+  const questionOutputContainer = document.querySelector('.askunali-question-output-container');
+  if (answer_font_color) {
+    questionOutputContainer.style.color = answer_font_color;
+  }
+  questionOutputContainer.style.border = 'none'
+}
+
+function applyQuestionOutputStyles(styles) {
+  const {
+    border_color,
+    border_radius,
+    answer_background_color,
+  } = styles;
+
+  const questionOutputContainer = document.querySelector('.askunali-question-output-container');
+  if (border_color) {
+    questionOutputContainer.style.border = `1px solid ${border_color}`;
+    questionOutputContainer.style.borderBottom = 'none';
+  }
+  if (answer_background_color) {
+    questionOutputContainer.style.backgroundColor = answer_background_color;
+  }
+  if (border_radius !== undefined) {
+    questionOutputContainer.style.borderRadius = `${border_radius}px ${border_radius}px 0 0`;
+  }
+
+  const questionOutputContainerBottom = document.querySelector('.askunali-question-output-container-bottom');
+  if (answer_background_color) {
+    questionOutputContainerBottom.style.backgroundColor = answer_background_color;
+  }
+  if (border_color) {
+    questionOutputContainerBottom.style.border = `1px solid ${border_color}`;
+    questionOutputContainerBottom.style.borderTop = 'none';
+  }
+  if (border_radius !== undefined) {
+    questionOutputContainerBottom.style.borderRadius = `0 0 ${border_radius}px ${border_radius}px`;
+    questionOutputContainerBottom.style.height = `${border_radius}px`;
+  }
+}

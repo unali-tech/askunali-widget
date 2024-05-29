@@ -16,13 +16,44 @@ if (typeof window.askUnaliDefaultConfig === 'undefined') {
   };
 }
 
-function getConfig() {
-  const userConfig = window.askUnaliConfig || {};
-  return {
-    ...askUnaliDefaultConfig,
-    ...userConfig,
+
+async function getConfig(userConfig) {
+  const defaultConfig = {
+    apiKey: 'default',
+    styles: {
+      border_color: '#D0DDE8',
+      border_radius: '4px',
+      question_font_color: 'inherit',
+      question_background_color: 'white',
+      answer_font_color: 'inherit',
+      answer_background_color: 'transparent',
+    },
   };
+
+  const scriptTagStyles = userConfig.styles || {};
+
+  let apiStyles = {};
+  try {
+    apiStyles = await fetchWidgetStyles(userConfig.apiKey);
+  } catch (error) {
+    console.error('Error fetching widget styles from API:', error);
+  }
+
+  const mergedStyles = {
+    ...defaultConfig.styles,
+    ...apiStyles,
+    ...scriptTagStyles,
+  };
+
+  const finalConfig = {
+    ...defaultConfig,
+    ...userConfig,
+    styles: mergedStyles,
+  };
+
+  return finalConfig;
 }
+
 
 function clearAnswer() {
   const answerContainer = document.getElementById('askunali-answer');
@@ -72,15 +103,18 @@ function resetWidget() {
   if (outputContainer) {
     outputContainer.style.border = '1px solid #D0DDE8';
     outputContainer.style.borderBottom = '1px solid #D0DDE8';
+    outputContainer.style.borderRadius = '4px';
   }
 
   // Reset the styles of the bottom container
   const bottomContainer = document.querySelector('.askunali-question-output-container-bottom');
   if (bottomContainer) {
-    bottomContainer.style.height = '0';
+    bottomContainer.style.height = 'auto';
     bottomContainer.style.border = 'none';
+    bottomContainer.style.borderRadius = '0';
   }
 }
+
 
 
 function updateApiKey(newApiKey) {
