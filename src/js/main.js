@@ -16,20 +16,35 @@
     document.head.appendChild(extraStyles);
   }  
 
-  function init(config) {
+  async function init(config) {
     const widgetHTML = `{{WIDGET_HTML}}`;
     const targetDiv = document.getElementById('askunali');
-
+  
     if (!targetDiv) {
       console.warn('Could not find the target div for the widget.');
       return;
     }
-
+  
     targetDiv.innerHTML = widgetHTML;
-
-    initWidget(config);
+  
+    const widgetElement = document.getElementById('askunali-widget');
+    widgetElement.classList.add('hidden');
+  
+    const finalConfig = await getConfig(config);
+    window.askUnaliFinalConfig = finalConfig;
+  
+    applyStyles(finalConfig.styles);
+  
+    initWidget(finalConfig);
     loadAnimationStyles();
+  
+    // Ensure the styles are applied before revealing the widget
+    requestAnimationFrame(() => {
+      widgetElement.classList.remove('hidden');
+    });
   }
+  
+  
 
   function updateApiKey(newApiKey) {
     window.askUnaliConfig = {

@@ -1,5 +1,5 @@
 async function fetchAnswer(question) {
-  const config = getConfig();
+  const config = window.askUnaliFinalConfig;
 
   try {
     const response = await fetch('https://rag-api-e0qu.onrender.com/ask_question', {
@@ -42,7 +42,7 @@ async function fetchSuggestedQuestions(apiKey) {
       headers: {
         'Content-Type': 'application/json'
       }
-    });Ca
+    });
 
     if (!response.ok) {
       console.error(`HTTP error! status: ${response.status}`);
@@ -63,3 +63,24 @@ async function fetchSuggestedQuestions(apiKey) {
   }
 }
 
+async function fetchWidgetStyles(apiKey) {
+  try {
+    const response = await fetch(`https://xybo-itpz-j8ne.p7.xano.io/api:pfjomY_8/get_styles?widget_api_key=${apiKey}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      return {};
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error in fetchWidgetStyles:', error);
+    return {};
+  }
+}
