@@ -105,7 +105,6 @@ async function initWidget() {
       // Apply styles to the question output container
       applyQuestionOutputStyles(styles);
         
-      console.log(border_radius)
       // Modify the styles of the output container
       const outputContainer = document.querySelector('.askunali-question-output-container');
       outputContainer.style.border = '1px solid var(--color-border)';

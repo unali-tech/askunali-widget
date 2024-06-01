@@ -22,8 +22,6 @@
 #askunali-widget {
   width: var(--widget-width);
   max-width: var(--widget-max-width);
-  margin: 0 auto;
-  padding: calc(var(--spacing-base) * 2);
   color: var(--color-secondary);
 }
 
