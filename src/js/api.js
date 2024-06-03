@@ -2,7 +2,7 @@ async function fetchAnswer(question) {
   const config = window.askUnaliFinalConfig;
 
   try {
-    const response = await fetch('https://rag-api-preview-latest.onrender.com/ask_question', {
+    const response = await fetch('https://rag-api-e0qu.onrender.com/ask_question', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
