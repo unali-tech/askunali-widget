@@ -73,6 +73,8 @@ function applyStyles(styles) {
     question_background_color,
     answer_font_color,
     answer_background_color,
+    suggestion_background_color,
+    icon_color,
   } = styles;
 
   const widget = document.getElementById('askunali-widget');
@@ -96,6 +98,20 @@ function applyStyles(styles) {
     questionOutputContainer.style.color = answer_font_color;
   }
   questionOutputContainer.style.border = 'none'
+
+  const questionIcon = document.querySelector('.askunali-question-icon');
+  if (icon_color) {
+    questionIcon.querySelector('circle').setAttribute('stroke', icon_color);
+    questionIcon.querySelector('path').setAttribute('stroke', icon_color);
+  }
+
+  const questionOutputIcon = document.getElementById('askunali-question-output-icon');
+  if (icon_color) {
+    questionOutputIcon.querySelectorAll('circle')[1].setAttribute('fill', icon_color);
+    questionOutputIcon.querySelectorAll('path').forEach(path => {
+      path.setAttribute('fill', icon_color);
+    });
+  }
 }
 
 function applyQuestionOutputStyles(styles) {

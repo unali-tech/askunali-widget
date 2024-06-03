@@ -27,6 +27,8 @@ async function getConfig(userConfig) {
       question_background_color: 'white',
       answer_font_color: 'inherit',
       answer_background_color: 'transparent',
+      suggestion_background_color: '#f9fbff',
+      icon_color: 'rgb(48, 56, 64);',
     },
   };
 

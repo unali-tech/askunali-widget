@@ -28,7 +28,6 @@ async function initWidget() {
       fetchWidgetStyles(config.apiKey)
     ]);
     displaySuggestedQuestions(suggestedQuestions);
-    applyStyles(widgetStyles);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -265,11 +264,17 @@ function displaySuggestedQuestions(questions) {
   const suggestionContainer = document.getElementById('askunali-question-suggestions-container');
   suggestionContainer.innerHTML = '';
 
+  const { styles } = window.askUnaliFinalConfig;
+  const { border_radius, suggestion_background_color } = styles;
+
   if (questions) {
     questions.forEach(question => {
       const suggestionElement = createElement('div', 'askunali-question-suggestion', question);
+      
+      suggestionElement.style.borderRadius = `${border_radius}px`;
+      suggestionElement.style.backgroundColor = suggestion_background_color;
+      
       appendElement(suggestionContainer, suggestionElement);
     });
   }
 }
-
