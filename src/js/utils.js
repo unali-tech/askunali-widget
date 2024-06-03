@@ -112,6 +112,11 @@ function applyStyles(styles) {
       path.setAttribute('fill', icon_color);
     });
   }
+
+  const clearButtonImage = document.getElementById('askunali-clear-button-image');
+  if (icon_color) {
+    clearButtonImage.querySelector('path').setAttribute('fill', icon_color);
+  }
 }
 
 function applyQuestionOutputStyles(styles) {
