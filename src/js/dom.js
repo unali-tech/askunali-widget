@@ -1,5 +1,4 @@
-async function initWidget() {
-  const config = window.askUnaliFinalConfig;
+async function initWidget(config, locale) {
   const questionInput = document.getElementById('askunali-question_input_div');
   const questionInputContainer = document.querySelector('.askunali-question-input-container');
   const answerContainer = document.getElementById('askunali-answer');
@@ -8,11 +7,16 @@ async function initWidget() {
   const returnButton = document.getElementById('askunali-return-button');
   const shoppingContainer = document.getElementById('askunali-shopping-container');
   const shoppingLinks = document.getElementById('askunali-shopping-links');
+  const shoppingDescription = document.getElementById('askunali-shopping-cart-description');
   const suggestionContainer = document.getElementById('askunali-question-suggestions-container');
   const clearButtonImage = document.getElementById('askunali-clear-button-image');
   const clearButtonContainer = document.getElementById('askunali-clear-button-container');
 
   let originalAnswer = '';
+
+  questionInput.setAttribute('data-placeholder', locale.placeholder);
+  shoppingDescription.textContent = locale.shoppingCartDescription;
+  returnButton.textContent = locale.returnButton;
 
   questionInput.addEventListener('input', handleQuestionInput);
   questionInput.addEventListener('keydown', handleQuestionKeydown);
@@ -22,16 +26,7 @@ async function initWidget() {
   suggestionContainer.addEventListener('click', handleSuggestionClick);
   clearButtonContainer.addEventListener('click', handleClearButtonClick);
 
-  try {
-    const [suggestedQuestions, widgetStyles] = await Promise.all([
-      fetchSuggestedQuestions(config.apiKey),
-      fetchWidgetStyles(config.apiKey)
-    ]);
-    displaySuggestedQuestions(suggestedQuestions);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-  
+  displaySuggestedQuestions(config.suggestedQuestions, config.styles);
 
   function handleQuestionInput() {
     if (questionInput.textContent.trim().length > 0) {
@@ -97,25 +92,21 @@ async function initWidget() {
       // Hide the suggestion container
       suggestionContainer.style.display = 'none';
 
-      // Get the config and styles
-      const { styles } = window.askUnaliFinalConfig;
-      const { border_radius } = styles;
-
       // Apply styles to the question output container
-      applyQuestionOutputStyles(styles);
+      applyQuestionOutputStyles(config.styles);
         
       // Modify the styles of the output container
       const outputContainer = document.querySelector('.askunali-question-output-container');
       outputContainer.style.border = '1px solid var(--color-border)';
       outputContainer.style.borderBottom = 'none';
-      outputContainer.style.setProperty('border-radius', `${border_radius}px ${border_radius}px 0 0`);
+      outputContainer.style.setProperty('border-radius', `${config.styles.border_radius}px ${config.styles.border_radius}px 0 0`);
 
       // Modify the styles of the bottom container
       const bottomContainer = document.querySelector('.askunali-question-output-container-bottom');
-      bottomContainer.style.height = `${border_radius}px`;
+      bottomContainer.style.height = `${config.styles.border_radius}px`;
       bottomContainer.style.border = '1px solid var(--color-border)';
       bottomContainer.style.borderTop = 'none';
-      bottomContainer.style.setProperty('border-radius', `0 0 ${border_radius}px ${border_radius}px`);
+      bottomContainer.style.setProperty('border-radius', `0 0 ${config.styles.border_radius}px ${config.styles.border_radius}px`);
 
   
       const startTime = getTimestamp();
@@ -134,7 +125,7 @@ async function initWidget() {
           console.error('Error:', error);
   
           stopLoadingAnimation();
-          displayErrorMessage();
+          displayErrorMessage(locale);
         });
     }
   }  
@@ -233,9 +224,9 @@ async function initWidget() {
     }
   }
 
-  function displayErrorMessage() {
-    answerContainer.textContent = 'Oops! Something went wrong. Please try again later.';
-  }
+  function displayErrorMessage(locale) {
+    answerContainer.textContent = locale.errorMessage;
+  }  
 
   function handleIngredientClick(event, ingredients, activities) {
     if (event.target.classList.contains('askunali-ingredient-link')) {
@@ -260,11 +251,10 @@ async function initWidget() {
   }
 }
 
-function displaySuggestedQuestions(questions) {
+function displaySuggestedQuestions(questions, styles) {
   const suggestionContainer = document.getElementById('askunali-question-suggestions-container');
   suggestionContainer.innerHTML = '';
 
-  const { styles } = window.askUnaliFinalConfig;
   const { border_radius, suggestion_background_color } = styles;
 
   if (questions) {
