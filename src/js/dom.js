@@ -11,6 +11,7 @@ async function initWidget(config, locale) {
   const suggestionContainer = document.getElementById('askunali-question-suggestions-container');
   const clearButtonImage = document.getElementById('askunali-clear-button-image');
   const clearButtonContainer = document.getElementById('askunali-clear-button-container');
+  const questionOutputIcon = document.getElementById('askunali-question-output-icon');
 
   let originalAnswer = '';
 
@@ -44,6 +45,7 @@ async function initWidget(config, locale) {
       questionInput.textContent = suggestedQuestion;
       questionInput.classList.add('not-empty');
       showElement(clearButtonImage);
+      showElement(questionOutputIcon);
       handleQuestionSubmit();
     }
   }
