@@ -260,7 +260,9 @@ function displaySuggestedQuestions(questions, styles) {
   const { border_radius, suggestion_background_color } = styles;
 
   if (questions) {
-    questions.forEach(question => {
+    const maxQuestions = window.innerWidth < 900 ? 3 : questions.length;
+
+    questions.slice(0, maxQuestions).forEach(question => {
       const suggestionElement = createElement('div', 'askunali-question-suggestion', question);
       
       suggestionElement.style.borderRadius = `${border_radius}px`;
