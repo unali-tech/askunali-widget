@@ -53,6 +53,7 @@ gulp.task('bundle-js', function() {
       './src/js/api.js',
       './src/js/animation.js',
       './src/js/custom-styles.js',
+      './src/js/translations.js',
       './src/js/dom.js',
       './dist/js/main.js'
     ])
@@ -62,6 +63,7 @@ gulp.task('bundle-js', function() {
       'api.js',
       'animation.js',
       'custom-styles.js',
+      'translations.js',
       'dom.js',
       'main.js'
     ]))

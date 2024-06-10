@@ -30,15 +30,27 @@ async function getConfig(userConfig) {
       suggestion_background_color: '#f9fbff',
       icon_color: 'rgb(48, 56, 64);',
     },
+    language: 'en',
+    suggestedQuestions: []
   };
 
   const scriptTagStyles = userConfig.styles || {};
 
   let apiStyles = {};
+  let apiLanguage = defaultConfig.language;
   try {
-    apiStyles = await fetchWidgetStyles(userConfig.apiKey);
+    const apiResponse = await fetchWidgetStyles(userConfig.apiKey);
+    apiStyles = apiResponse.styles || {};
+    apiLanguage = apiResponse.language || defaultConfig.language;
   } catch (error) {
     console.error('Error fetching widget styles from API:', error);
+  }
+
+  let suggestedQuestions = [];
+  try {
+    suggestedQuestions = await fetchSuggestedQuestions(userConfig.apiKey);
+  } catch (error) {
+    console.error('Error fetching suggested questions:', error);
   }
 
   const mergedStyles = {
@@ -51,6 +63,8 @@ async function getConfig(userConfig) {
     ...defaultConfig,
     ...userConfig,
     styles: mergedStyles,
+    language: apiLanguage,
+    suggestedQuestions: suggestedQuestions
   };
 
   return finalConfig;

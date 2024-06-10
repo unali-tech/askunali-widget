@@ -78,7 +78,12 @@ async function fetchWidgetStyles(apiKey) {
     }
 
     const data = await response.json();
-    return data;
+    return {
+      styles: data.styles,
+      language: data.language.toLowerCase()
+    };
+
+    
   } catch (error) {
     console.error('Error in fetchWidgetStyles:', error);
     return {};

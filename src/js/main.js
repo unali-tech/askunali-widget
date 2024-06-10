@@ -34,8 +34,10 @@
     window.askUnaliFinalConfig = finalConfig;
   
     applyStyles(finalConfig.styles);
+
+    const locale = window.askUnaliTranslations[finalConfig.language] || window.askUnaliTranslations.en;
   
-    initWidget(finalConfig);
+    initWidget(finalConfig, locale);
     loadAnimationStyles();
   
     // Ensure the styles are applied before revealing the widget
@@ -43,8 +45,6 @@
       widgetElement.classList.remove('hidden');
     });
   }
-  
-  
 
   function updateApiKey(newApiKey) {
     window.askUnaliConfig = {
