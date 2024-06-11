@@ -79,13 +79,22 @@ async function fetchWidgetStyles(apiKey) {
 
     const data = await response.json();
     return {
-      styles: data.styles,
+      styles: {
+        border_color: data.border_color,
+        border_radius: data.border_radius,
+        question_font_color: data.question_font_color,
+        question_background_color: data.question_background_color,
+        answer_font_color: data.answer_font_color,
+        answer_background_color: data.answer_background_color,
+        suggestion_background_color: data.suggestion_background_color,
+        icon_color: data.icon_color
+      },
       language: data.language.toLowerCase()
     };
-
     
   } catch (error) {
     console.error('Error in fetchWidgetStyles:', error);
     return {};
   }
 }
+

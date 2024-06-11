@@ -46,6 +46,7 @@ async function getConfig(userConfig) {
     console.error('Error fetching widget styles from API:', error);
   }
 
+
   let suggestedQuestions = [];
   try {
     suggestedQuestions = await fetchSuggestedQuestions(userConfig.apiKey);
