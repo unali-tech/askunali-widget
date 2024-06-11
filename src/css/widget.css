@@ -5,10 +5,17 @@
   --color-primary: #004695;
   --color-secondary: #303840;
   --color-background: #F9FBFF;
-  --color-border: #D0DDE8;
+  --color-border: var(--border-color, #D0DDE8);
+  --border-radius: var(--border-radius, 4px);
   --font-size-question-box: 16px;
   --font-size-answer-box: 15px;
   --font-size-sources: 14px;
+  --question-font-color: var(--question-font-color, inherit);
+  --question-background-color: var(--question-background-color, white);
+  --answer-font-color: var(--answer-font-color, inherit);
+  --answer-background-color: var(--answer-background-color, transparent);
+  --suggestion-background-color: var(--suggestion-background-color, #f9fbff);
+  --icon-color: var(--icon-color, rgb(48, 56, 64));
 }
 
 #askunali-widget.hidden {
@@ -28,16 +35,15 @@
 #askunali-widget .askunali-question-input-container,
 #askunali-widget .askunali-question-output-container {
   position: relative;
-  background-color: white;
+  background-color: var(--question-background-color);
 }
 
 #askunali-widget .askunali-question-input-container {
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: text;
   display: flex;
   align-items: center;
-
   padding-left: 55px;
   height: 75px;
 }
@@ -45,11 +51,9 @@
 #askunali-widget #askunali-clear-button-container {
   height: 100%;
   width: 75px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   cursor: pointer;
 }
 
@@ -57,16 +61,16 @@
   padding: var(--spacing-base) calc(var(--spacing-base) * 1.2);
   min-height: calc(1rem * 6);
   margin-top: calc(var(--spacing-base) * 1.5);
-  background-color: transparent;
+  background-color: var(--answer-background-color);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   padding-left: 55px;
   padding-top: 0px;
   border: none;
 }
 
 #askunali-widget .askunali-question-output-container-bottom {
-  background-color: transparent;
+  background-color: var(--answer-background-color);
   border: none;
   border-radius: 0;
   position: relative;
@@ -77,7 +81,6 @@
   padding-bottom: 0;
 }
 
-
 #askunali-widget #askunali-question-suggestions-container {
   display: flex;
   justify-content: left;
@@ -86,17 +89,16 @@
 }
 
 #askunali-widget .askunali-question-suggestion {
-  background: #F9FBFF;
+  background: var(--suggestion-background-color);
   border: 1px solid #D5E1EA;
   height: 50px;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 20px;
   cursor: pointer;
   max-width: 80%;
-
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -104,7 +106,6 @@
   background-color: #E6E9F2;
   border-color: #C1D0E0;
 }
-
 
 #askunali-widget .askunali-question-icon {
   position: absolute;
@@ -132,8 +133,8 @@
   resize: none;
   font-size: var(--font-size-question-box);
   line-height: 1.5;
-  color: inherit;
-  background-color: transparent;
+  color: var(--question-font-color);
+  background-color: var(--question-background-color);
 }
 
 #askunali-widget .askunali-question-input-area::placeholder {
@@ -145,6 +146,7 @@
   font-size: 15px;
   line-height: 22px;
   padding-top: 20px;
+  color: var(--answer-font-color);
 }
 
 #askunali-widget #askunali-sources,
@@ -155,7 +157,7 @@
 
 #askunali-widget #askunali-shopping-cart-description {
   font-size: 15px;
-  color: #303840;
+  color: var(--color-secondary);
   margin-left: 10px;
   margin-right: 5px;
   opacity: 90%;
@@ -195,17 +197,13 @@
   justify-content: center;
   align-items: center;
   display: none;
-
   background: #FBFBFF;
   opacity: 90%;
-
   border: 0.5px solid #D5E1EA;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   height: 42px;
   width: 100px;
-
   margin-top: 20px;
-
   cursor: pointer;
 }
 
@@ -230,19 +228,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   background: #FBFBFF;
   border: 0.5px solid #D5E1EA;
-  border-radius: 4px;
-
+  border-radius: var(--border-radius);
   height: 40px;
   min-width: 40px;
   padding: 0 15px;
-
-  color: #303840;
+  color: var(--color-secondary);
   text-decoration: none;
   opacity: 90%;
-
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
