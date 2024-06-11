@@ -101,21 +101,21 @@ function applyStyles(styles) {
 
   const questionIcon = document.querySelector('.askunali-question-icon');
   if (icon_color) {
-    questionIcon.querySelector('circle').setAttribute('stroke', icon_color);
-    questionIcon.querySelector('path').setAttribute('stroke', icon_color);
+    questionIcon.querySelector('circle').style.stroke = icon_color;
+    questionIcon.querySelector('path').style.stroke = icon_color;
   }
 
   const questionOutputIcon = document.getElementById('askunali-question-output-icon');
   if (icon_color) {
-    questionOutputIcon.querySelectorAll('circle')[1].setAttribute('fill', icon_color);
+    questionOutputIcon.querySelectorAll('circle')[1].style.fill = icon_color;
     questionOutputIcon.querySelectorAll('path').forEach(path => {
-      path.setAttribute('fill', icon_color);
+      path.style.fill = icon_color;
     });
   }
 
   const clearButtonImage = document.getElementById('askunali-clear-button-image');
   if (icon_color) {
-    clearButtonImage.querySelector('path').setAttribute('fill', icon_color);
+    clearButtonImage.querySelector('path').style.fill = icon_color;
   }
 }
 

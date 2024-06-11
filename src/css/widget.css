@@ -256,30 +256,3 @@
   justify-content: space-between;
   align-items: baseline;
 }
-
-@media screen and (max-width: 900px) {
-  :root {
-    --widget-max-width: 340px;
-  }
-
-  #askunali-widget .askunali-question-output-container {
-    padding-left: 15px;
-  }
-
-  #askunali-widget #askunali-answer {
-    padding-top: 55px;
-  }
-
-  #askunali-widget .askunali-question-output-container-bottom {
-    padding-left: 15px;
-  }
-
-  #askunali-widget #askunali-question-output-icon {
-    display: none;
-  }
-
-  #askunali-widget .askunali-question-suggestion {
-    max-width: 100%;
-  }
-}
-
