@@ -20,7 +20,7 @@ window.askUnaliAnimationStyles = `
     }
 
     #askunali-widget .askunali-question-output-container {
-      padding-left: 35px !important;
+      padding-left: 0px !important;
     }
 
     #askunali-widget #askunali-answer {
@@ -28,7 +28,7 @@ window.askUnaliAnimationStyles = `
     }
 
     #askunali-widget .askunali-question-output-container-bottom {
-      padding-left: 35px !important;
+      padding-left: 0px !important;
     }
 
     #askunali-widget #askunali-question-output-icon {
