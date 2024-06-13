@@ -15,28 +15,29 @@ window.askUnaliAnimationStyles = `
   }
 
   @media screen and (max-width: 1900px) {
-  :root {
-    --widget-max-width: 340px;
-  }
+    :root {
+      --widget-max-width: 340px;
+    }
 
-  #askunali-widget .askunali-question-output-container {
-    padding-left: 15px !important;
-  }
+    #askunali-widget .askunali-question-output-container {
+      padding-left: 35px !important;
+    }
 
-  #askunali-widget #askunali-answer {
-    padding-top: 55px !important;
-  }
+    #askunali-widget #askunali-answer {
+      padding-top: 35px !important;
+    }
 
-  #askunali-widget .askunali-question-output-container-bottom {
-    padding-left: 15px !important;;
-  }
+    #askunali-widget .askunali-question-output-container-bottom {
+      padding-left: 35px !important;
+    }
 
-  #askunali-widget #askunali-question-output-icon {
-    display: none;
-  }
+    #askunali-widget #askunali-question-output-icon {
+      display: none;
+    }
 
-  #askunali-widget .askunali-question-suggestion {
-    max-width: 100% !important;
+    #askunali-widget .askunali-question-suggestion {
+      max-width: 100% !important;
+    }
   }
 
   :root {
