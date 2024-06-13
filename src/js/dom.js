@@ -89,6 +89,7 @@ async function initWidget(config, locale) {
     const question = questionInput.textContent.trim();
     if (question !== '') {
       clearAnswer();
+
       startLoadingAnimation();
   
       // Hide the suggestion container
@@ -102,6 +103,9 @@ async function initWidget(config, locale) {
       outputContainer.style.border = '1px solid var(--color-border)';
       outputContainer.style.borderBottom = 'none';
       outputContainer.style.setProperty('border-radius', `${config.styles.border_radius}px ${config.styles.border_radius}px 0 0`);
+      outputContainer.style.paddingLeft = `35px`;
+      outputContainer.style.paddingTop = `35px`;
+      outputContainer.style.paddingRight = `35px`;
 
       // Modify the styles of the bottom container
       const bottomContainer = document.querySelector('.askunali-question-output-container-bottom');
@@ -138,6 +142,8 @@ async function initWidget(config, locale) {
     const ingredients = data.ingredients_data;
     const activities = data.activities_data;
     const shoppingData = data.shopping_data;
+
+    const bottomContainer = document.getElementById('askunali-bottom-container');
   
     if (answerType === 'enhanced') {
       displayEnhancedAnswer(answer, ingredients, activities, () => {
@@ -146,11 +152,25 @@ async function initWidget(config, locale) {
         answerContainer.addEventListener('click', (event) => handleIngredientClick(event, ingredients, activities));
       });
     } else {
-      typeText(answerContainer, answer);
-    }
+      typeText(answerContainer, answer, showBasicFooter);
+      bottomContainer.style.justifyContent = 'flex-end';
+      bottomContainer.style.padding = '10px 0';
+    }    
+  }
+
+  function showBasicFooter() {
+    const outputContainerBottom = document.querySelector('.askunali-question-output-container-bottom');
+    outputContainerBottom.style.border = '1px solid var(--color-border)';
+    outputContainerBottom.style.height = 'auto';
+    
+    showElement(linkElement)
   }
   
   function displayEnhancedAnswer(answer, ingredients, activities, onComplete) {
+    const bottomContainer = document.getElementById('askunali-bottom-container');
+    bottomContainer.style.justifyContent = 'space-between';
+    bottomContainer.style.padding = '';
+
     const names = [...ingredients.map(item => item.ingredient_name), ...activities.map(item => item.activity_name)];
     let currentText = '';
     let index = 0;
