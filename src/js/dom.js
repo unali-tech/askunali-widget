@@ -89,15 +89,15 @@ async function initWidget(config, locale) {
     const question = questionInput.textContent.trim();
     if (question !== '') {
       clearAnswer();
-
+  
       startLoadingAnimation();
   
       // Hide the suggestion container
       suggestionContainer.style.display = 'none';
-
+  
       // Apply styles to the question output container
       applyQuestionOutputStyles(config.styles);
-        
+  
       // Modify the styles of the output container
       const outputContainer = document.querySelector('.askunali-question-output-container');
       outputContainer.style.border = '1px solid var(--color-border)';
@@ -106,14 +106,32 @@ async function initWidget(config, locale) {
       outputContainer.style.paddingLeft = `35px`;
       outputContainer.style.paddingTop = `35px`;
       outputContainer.style.paddingRight = `35px`;
-
+  
       // Modify the styles of the bottom container
       const bottomContainer = document.querySelector('.askunali-question-output-container-bottom');
       bottomContainer.style.height = `${config.styles.border_radius}px`;
       bottomContainer.style.border = '1px solid var(--color-border)';
       bottomContainer.style.borderTop = 'none';
       bottomContainer.style.setProperty('border-radius', `0 0 ${config.styles.border_radius}px ${config.styles.border_radius}px`);
-
+  
+      // Add media query styles
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @media screen and (max-width: 1900px) {
+          #askunali-sources {
+            width: 100%;
+            justify-content: center;
+          }
+          #askunali-link {
+            margin-bottom: 15px;
+          }
+          #askunali-bottom-container {
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+        }
+      `;
+      document.head.appendChild(style);
   
       const startTime = getTimestamp();
       console.log('Start time:', startTime);
@@ -134,7 +152,7 @@ async function initWidget(config, locale) {
           displayErrorMessage(locale);
         });
     }
-  }  
+  }   
 
   function displayAnswer(data) {
     const answerType = data.type;
