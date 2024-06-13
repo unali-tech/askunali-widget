@@ -125,7 +125,7 @@ function applyQuestionOutputStyles(styles) {
     border_radius,
     answer_background_color,
   } = styles;
-
+  
   const questionOutputContainer = document.querySelector('.askunali-question-output-container');
   if (border_color) {
     questionOutputContainer.style.border = `1px solid ${border_color}`;
