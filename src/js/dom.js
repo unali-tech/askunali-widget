@@ -103,7 +103,7 @@ async function initWidget(config, locale) {
       outputContainer.style.border = '1px solid var(--color-border)';
       outputContainer.style.borderBottom = 'none';
       outputContainer.style.setProperty('border-radius', `${config.styles.border_radius}px ${config.styles.border_radius}px 0 0`);
-      outputContainer.style.paddingLeft = `35px`;
+      outputContainer.style.paddingLeft = `70px`;
       outputContainer.style.paddingTop = `35px`;
       outputContainer.style.paddingRight = `35px`;
   
@@ -114,17 +114,18 @@ async function initWidget(config, locale) {
       bottomContainer.style.borderTop = 'none';
       bottomContainer.style.setProperty('border-radius', `0 0 ${config.styles.border_radius}px ${config.styles.border_radius}px`);
   
+
+      // Modify the styles of the question suggestions
+      const suggestions = document.querySelectorAll('.askunali-question-suggestion');
+      // we just need to apply the proper border color
+      for (let i = 0; i < suggestions.length; i++) {
+        suggestions[i].style.borderColor = config.styles.border_color;
+      }
+
       // Add media query styles
       const style = document.createElement('style');
       style.innerHTML = `
         @media screen and (max-width: 1900px) {
-          #askunali-sources {
-            width: 100%;
-            justify-content: center;
-          }
-          #askunali-link {
-            margin-bottom: 15px;
-          }
           #askunali-bottom-container {
             flex-wrap: wrap;
             justify-content: center;
@@ -180,6 +181,7 @@ async function initWidget(config, locale) {
     const outputContainerBottom = document.querySelector('.askunali-question-output-container-bottom');
     outputContainerBottom.style.border = '1px solid var(--color-border)';
     outputContainerBottom.style.height = 'auto';
+    outputContainerBottom.style.borderTop = '35px'
     
     showElement(linkElement)
   }
@@ -295,7 +297,7 @@ function displaySuggestedQuestions(questions, styles) {
   const suggestionContainer = document.getElementById('askunali-question-suggestions-container');
   suggestionContainer.innerHTML = '';
 
-  const { border_radius, suggestion_background_color } = styles;
+  const { border_color, border_radius, suggestion_background_color } = styles;
 
   if (questions) {
     const maxQuestions = window.innerWidth < 900 ? 3 : questions.length;
@@ -303,6 +305,7 @@ function displaySuggestedQuestions(questions, styles) {
     questions.slice(0, maxQuestions).forEach(question => {
       const suggestionElement = createElement('div', 'askunali-question-suggestion', question);
       
+      suggestionElement.style.borderColor = border_color;
       suggestionElement.style.borderRadius = `${border_radius}px`;
       suggestionElement.style.backgroundColor = suggestion_background_color;
       

@@ -24,13 +24,13 @@ window.askUnaliAnimationStyles = `
     }
 
     #askunali-widget #askunali-answer {
-      padding-top: 35px !important;
+      margin-left: 70px !important;
     }
 
-    #askunali-widget .askunali-question-output-container-bottom {
-      padding-left: 0px !important;
+    #askunali-widget #askunali-shopping-container {
+      margin-left: 70px !important;
     }
-
+      
     #askunali-widget #askunali-question-output-icon {
       display: none;
     }
