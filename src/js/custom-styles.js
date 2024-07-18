@@ -23,6 +23,15 @@ window.askUnaliAnimationStyles = `
       padding-left: 0px !important;
     }
 
+    
+    #askunali-widget .askunali-question-suggestion:first-child {
+      margin-left: 0px !important;
+    }
+
+    #askunali-widget #askunali-question-suggestions-container {
+      margin-left: 70px !important;
+    }
+
     #askunali-widget #askunali-answer {
       margin-left: 70px !important;
     }
