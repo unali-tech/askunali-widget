@@ -17,6 +17,7 @@
   }  
 
   async function init(config) {
+    config = config || window.askUnaliConfig;
     const widgetHTML = `{{WIDGET_HTML}}`;
     const targetDiv = document.getElementById('askunali');
   
