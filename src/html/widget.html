@@ -19,51 +19,46 @@
     </div>
 
     <div class="askunali-question-output-container">
-      <svg id="askunali-question-output-icon" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="16" r="11.2" fill="white"/>
-        <circle cx="16" cy="16" r="9.6" fill="#233550"/>
-        <g class="outer-donut-1">
-          <g>
-            <path d="M 16,1.6 A 14.4,14.4 0 0 1 30.4,16 L 27.2,16 A 11.2,11.2 0 0 0 16,4.8 Z" fill="#233550"/>
+      <div class="askunali-processing-container">
+        <svg id="askunali-question-output-icon" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="11.2" fill="white"/>
+          <circle cx="16" cy="16" r="9.6" fill="#233550"/>
+          <g class="outer-donut-1">
+            <g>
+              <path d="M 16,1.6 A 14.4,14.4 0 0 1 30.4,16 L 27.2,16 A 11.2,11.2 0 0 0 16,4.8 Z" fill="#233550"/>
+            </g>
           </g>
-        </g>
-        <g class="outer-donut-2">
-          <g>
-            <path d="M 30.4,16 A 14.4,14.4 0 0 1 16,30.4 L 16,27.2 A 11.2,11.2 0 0 0 27.2,16 Z" fill="#233550"/>
+          <g class="outer-donut-2">
+            <g>
+              <path d="M 30.4,16 A 14.4,14.4 0 0 1 16,30.4 L 16,27.2 A 11.2,11.2 0 0 0 27.2,16 Z" fill="#233550"/>
+            </g>
           </g>
-        </g>
-        <g class="outer-donut-3">
-          <g>
-            <path d="M 16,30.4 A 14.4,14.4 0 0 1 1.6,16 L 4.8,16 A 11.2,11.2 0 0 0 16,27.2 Z" fill="#233550"/>
+          <g class="outer-donut-3">
+            <g>
+              <path d="M 16,30.4 A 14.4,14.4 0 0 1 1.6,16 L 4.8,16 A 11.2,11.2 0 0 0 16,27.2 Z" fill="#233550"/>
+            </g>
           </g>
-        </g>
-        <g class="outer-donut-4">
-          <g>
-            <path d="M 1.6,16 A 14.4,14.4 0 0 1 16,1.6 L 16,4.8 A 11.2,11.2 0 0 0 4.8,16 Z" fill="#233550"/>
+          <g class="outer-donut-4">
+            <g>
+              <path d="M 1.6,16 A 14.4,14.4 0 0 1 16,1.6 L 16,4.8 A 11.2,11.2 0 0 0 4.8,16 Z" fill="#233550"/>
+            </g>
           </g>
-        </g>
-      </svg>
+        </svg>
+        <span id="askunali-processing-text">Processing</span>
+      </div>
       
       <div id="askunali-question-suggestions-container"></div>
       
       <div id="askunali-answer"></div>
 
       <div id="askunali-shopping-container">
-        <svg id="askunali-shopping-cart" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g opacity="0.9">
-          <path d="M4.25 9.03125H8.5L11.6875 21.25H25.5L28.6875 11.1562H13.2812" stroke="#47505A" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="22.8854" cy="25.5001" r="1.96154" fill="#47505A"/>
-          <circle cx="22.8854" cy="25.5001" r="1.96154" fill="#47505A"/>
-          <circle cx="22.8854" cy="25.5001" r="1.96154" fill="#47505A"/>
-          <circle cx="13.7311" cy="25.5001" r="1.96154" fill="#47505A"/>
-          <circle cx="13.7311" cy="25.5001" r="1.96154" fill="#47505A"/>
-          <circle cx="13.7311" cy="25.5001" r="1.96154" fill="#47505A"/>
-          </g>
-        </svg>
-        <span id="askunali-shopping-cart-description">related</span>
-        <svg id="askunali-shopping-cart-separator" width="3" height="10" viewBox="0 0 3 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path opacity="0.9" d="M1.26136 9.10795C0.950758 9.10795 0.683712 8.99811 0.460227 8.77841C0.236742 8.55492 0.125 8.28598 0.125 7.97159C0.125 7.66098 0.236742 7.39583 0.460227 7.17614C0.683712 6.95265 0.950758 6.84091 1.26136 6.84091C1.57197 6.84091 1.83902 6.95265 2.0625 7.17614C2.28598 7.39583 2.39773 7.66098 2.39773 7.97159C2.39773 8.17992 2.3447 8.37121 2.23864 8.54545C2.13636 8.71591 2 8.85227 1.82955 8.95455C1.65909 9.05682 1.4697 9.10795 1.26136 9.10795ZM1.26136 2.75568C0.950758 2.75568 0.683712 2.64394 0.460227 2.42045C0.236742 2.19697 0.125 1.92992 0.125 1.61932C0.125 1.30871 0.236742 1.04356 0.460227 0.823863C0.683712 0.600378 0.950758 0.488636 1.26136 0.488636C1.57197 0.488636 1.83902 0.600378 2.0625 0.823863C2.28598 1.04356 2.39773 1.30871 2.39773 1.61932C2.39773 1.82765 2.3447 2.01894 2.23864 2.19318C2.13636 2.36364 2 2.5 1.82955 2.60227C1.65909 2.70455 1.4697 2.75568 1.26136 2.75568Z" fill="#59626B"/>
-        </svg>
+        <div>
+          <span id="askunali-shopping-cart-description">Purchase</span>
+          <br>
+          <svg id="askunali-shopping-cart-separator" width="3" height="10" viewBox="0 0 3 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.9" d="M1.26136 9.10795C0.950758 9.10795 0.683712 8.99811 0.460227 8.77841C0.236742 8.55492 0.125 8.28598 0.125 7.97159C0.125 7.66098 0.236742 7.39583 0.460227 7.17614C0.683712 6.95265 0.950758 6.84091 1.26136 6.84091C1.57197 6.84091 1.83902 6.95265 2.0625 7.17614C2.28598 7.39583 2.39773 7.66098 2.39773 7.97159C2.39773 8.17992 2.3447 8.37121 2.23864 8.54545C2.13636 8.71591 2 8.85227 1.82955 8.95455C1.65909 9.05682 1.4697 9.10795 1.26136 9.10795ZM1.26136 2.75568C0.950758 2.75568 0.683712 2.64394 0.460227 2.42045C0.236742 2.19697 0.125 1.92992 0.125 1.61932C0.125 1.30871 0.236742 1.04356 0.460227 0.823863C0.683712 0.600378 0.950758 0.488636 1.26136 0.488636C1.57197 0.488636 1.83902 0.600378 2.0625 0.823863C2.28598 1.04356 2.39773 1.30871 2.39773 1.61932C2.39773 1.82765 2.3447 2.01894 2.23864 2.19318C2.13636 2.36364 2 2.5 1.82955 2.60227C1.65909 2.70455 1.4697 2.75568 1.26136 2.75568Z" fill="#59626B"/>
+          </svg>
+        </div>
         <div id="askunali-shopping-links"></div>  
       </div>
 
@@ -74,9 +69,6 @@
       <div id="askunali-separator"></div>
       <div id="askunali-bottom-container">
         <div id="askunali-sources"></div>
-        <div id="askunali-link">
-          <a href="https://askunali.com" target="_blank">Askunali.com</a>
-        </div>
       </div>
     </div>
 

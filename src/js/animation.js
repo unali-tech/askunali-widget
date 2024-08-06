@@ -1,15 +1,38 @@
+let dotsInterval;
+
 function startLoadingAnimation() {
   const svg = document.getElementById('askunali-question-output-icon');
+  const processingText = document.getElementById('askunali-processing-text');
+  const language = window.askUnaliFinalConfig.language || 'en';
+  const processingTranslation = window.askUnaliTranslations[language].processing;
+
+  // Set the initial text with the correct translation
+  processingText.textContent = processingTranslation;
+  processingText.style.display = 'inline-block';
+
   svg.classList.add('animate-svg');
   setTimeout(() => {
     svg.classList.add('rotate');
   }, 100);
+
+  let dots = 0;
+  dotsInterval = setInterval(() => {
+    dots = (dots + 1) % 4;
+    processingText.textContent = processingTranslation + '.'.repeat(dots);
+  }, 500);
 }
+
 
 function stopLoadingAnimation() {
   const svg = document.getElementById('askunali-question-output-icon');
+  const processingText = document.getElementById('askunali-processing-text');
   svg.classList.remove('rotate');
   svg.classList.remove('animate-svg');
+  clearInterval(dotsInterval);
+
+  processingText.innerHTML = 'AskUnali';
+  processingText.style.display = 'inline-block';
+
   setTimeout(() => {
     svg.querySelectorAll('g[class^="outer-donut-"] > g').forEach(donut => {
       donut.style.transform = 'translate(0, 0)';
@@ -17,10 +40,11 @@ function stopLoadingAnimation() {
   }, 0);
 }
 
+
 function typeText(element, text, onComplete) {
   let currentText = '';
   let index = 0;
-  const typingSpeed = 20;
+  const typingSpeed = 10;
 
   function type() {
     if (index < text.length) {
