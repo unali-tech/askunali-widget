@@ -104,8 +104,9 @@ async function initWidget(config, locale) {
       outputContainer.style.borderBottom = 'none';
       outputContainer.style.setProperty('border-radius', `${config.styles.border_radius}px ${config.styles.border_radius}px 0 0`);
       outputContainer.style.paddingLeft = `70px`;
-      outputContainer.style.paddingTop = `35px`;
+      outputContainer.style.paddingTop = `30px`;
       outputContainer.style.paddingRight = `35px`;
+      outputContainer.style.marginTop = `15px`;
   
       // Modify the styles of the bottom container
       const bottomContainer = document.querySelector('.askunali-question-output-container-bottom');
@@ -182,8 +183,6 @@ async function initWidget(config, locale) {
     outputContainerBottom.style.border = '1px solid var(--color-border)';
     outputContainerBottom.style.height = 'auto';
     outputContainerBottom.style.borderTop = '35px'
-    
-    showElement(linkElement)
   }
   
   function displayEnhancedAnswer(answer, ingredients, activities, onComplete) {
@@ -194,7 +193,7 @@ async function initWidget(config, locale) {
     const names = [...ingredients.map(item => item.ingredient_name), ...activities.map(item => item.activity_name)];
     let currentText = '';
     let index = 0;
-    const typingSpeed = 20;
+    const typingSpeed = 10;
   
     function type() {
       if (index < answer.length) {
@@ -249,8 +248,6 @@ async function initWidget(config, locale) {
       appendElement(sourcesList, sourceLink);
       count++;
     });
-  
-    showElement(linkElement);
   }
 
   function displayShoppingLinks(shoppingData) {

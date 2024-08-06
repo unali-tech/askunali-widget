@@ -272,7 +272,7 @@
     
           let currentText = '';
           let index = 0;
-          const typingSpeed = 20;
+          const typingSpeed = 10;
 
           const answerType = data.type;
 
@@ -300,8 +300,8 @@
           }
           
           function highlightIngredients(text) {
-            const ingredients = data.ingredients_data.map(item => item.ingredient_name);
-            const activities = data.activities_data.map(item => item.activity_name);
+            const ingredients = data.ingredients_data ? data.ingredients_data.map(item => item.ingredient_name) : [];
+            const activities = data.activities_data ? data.activities_data.map(item => item.activity_name) : [];
             const names = [...ingredients, ...activities];
           
             names.forEach(name => {
@@ -310,7 +310,7 @@
             });
           
             return text;
-          }
+          }          
           
           function showAdditionalElements() {
             const separator = document.getElementById('askunali-separator');
@@ -379,7 +379,7 @@
             if (totalSources > 0) {
               let sourcesText = 'Sources: ';
               let sourcesIndex = 0;
-              const typingSpeed = 30;
+              const typingSpeed = 10;
           
               function typeNextChar() {
                 if (sourcesIndex < sourcesText.length) {
