@@ -236,6 +236,15 @@
   margin-bottom: 14px;
 }
 
+#askunali-widget #askunali-shopping-cart-separator {
+  margin-top: 3px;
+}
+
+#askunali-widget #askunali-shopping-subcontainer {
+  display: flex;
+  align-items: center;
+}
+
 #askunali-widget #askunali-shopping-links {
   display: flex;
   margin-left: 15px;
