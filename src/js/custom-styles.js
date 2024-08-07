@@ -44,7 +44,7 @@ window.askUnaliAnimationStyles = `
     }
 
     #askunali-widget #askunali-answer {
-      margin-left: 70px !important;
+      margin-left: 25px !important;
       padding-top: 15px !important;
     }
 
@@ -54,10 +54,11 @@ window.askUnaliAnimationStyles = `
       
     #askunali-widget #askunali-question-output-icon {
       display: none;
+      left: 20px !important;
     }
 
     #askunali-widget #askunali-processing-text {
-      margin-left: 115px !important;
+      margin-left: 65px !important;
     }
 
     #askunali-widget #askunali-shopping-cart-description {
