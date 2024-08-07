@@ -19,6 +19,11 @@ window.askUnaliAnimationStyles = `
       --widget-max-width: 340px;
     }
 
+    #askunali-widget #askunali-question-input-container {
+      height: 60px;
+      font-size: 16px;
+    }
+
     #askunali-widget .askunali-question-output-container {
       padding-left: 0px !important;
     }
@@ -29,11 +34,18 @@ window.askUnaliAnimationStyles = `
     }
 
     #askunali-widget #askunali-question-suggestions-container {
-      margin-left: 70px !important;
+      margin-left: 20px !important;
+    }
+
+    #askunali-widget .askunali-question-suggestion {
+      max-width: 100% !important;
+      height: 40px !important;
+      font-size: 15px !important;
     }
 
     #askunali-widget #askunali-answer {
       margin-left: 70px !important;
+      padding-top: 15px !important;
     }
 
     #askunali-widget #askunali-shopping-container {
@@ -44,8 +56,13 @@ window.askUnaliAnimationStyles = `
       display: none;
     }
 
-    #askunali-widget .askunali-question-suggestion {
-      max-width: 100% !important;
+    #askunali-widget #askunali-processing-text {
+      margin-left: 115px !important;
+    }
+
+    #askunali-widget #askunali-shopping-cart-description {
+      font-size: 14px !important;
+      font-weight: 600;
     }
   }
 
