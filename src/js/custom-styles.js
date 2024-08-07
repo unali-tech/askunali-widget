@@ -48,8 +48,12 @@ window.askUnaliAnimationStyles = `
       padding-top: 15px !important;
     }
 
+    #askunali-widget .askunali-question-output-container-bottom {
+      padding-left: 25px !important;  
+    }
+
     #askunali-widget #askunali-shopping-container {
-      margin-left: 70px !important;
+      margin-left: 25px !important;
     }
       
     #askunali-widget #askunali-question-output-icon {
