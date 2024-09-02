@@ -216,19 +216,20 @@ async function initWidget(config, locale) {
     type();
   }
   
-  
 
   function displaySources(ingredients, activities) {
-    const totalSources = ingredients.length + activities.length;
+    const researchPaperIngredients = ingredients.filter(item => item.source === 'research_paper');
+    const researchPaperActivities = activities.filter(item => item.source === 'research_paper');
+    const totalSources = researchPaperIngredients.length + researchPaperActivities.length;
   
     if (totalSources > 0) {
       const sourcesText = 'Sources: ';
       typeText(sourcesList, sourcesText, () => {
-        appendSourceLinks(ingredients, activities);
+        appendSourceLinks(researchPaperIngredients, researchPaperActivities);
         showElement(sourcesList);
       });
     }
-  }
+  }  
   
   function appendSourceLinks(ingredients, activities) {
     let count = 1;
