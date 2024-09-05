@@ -14,7 +14,7 @@ window.askUnaliAnimationStyles = `
     display: none;
   }
 
-  @media screen and (max-width: 1900px) {
+  @media screen and (max-width: 1000px) {
     :root {
       --widget-max-width: 340px;
     }
