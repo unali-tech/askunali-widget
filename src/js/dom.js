@@ -3,6 +3,9 @@ async function initWidget(config, locale) {
   const questionInputContainer = document.querySelector('.askunali-question-input-container');
   const answerContainer = document.getElementById('askunali-answer');
   const sourcesList = document.getElementById('askunali-sources');
+  const sourcesPlaceholder = document.getElementById('askunali-sources-placeholder');
+  const sourcesPlaceholderText = document.getElementById('askunali-sources-placeholder-text');
+  const sourcesPlaceholderIcon = document.getElementById('askunali-sources-placeholder-icon');
   const linkElement = document.getElementById('askunali-link');
   const returnButton = document.getElementById('askunali-return-button');
   const shoppingContainer = document.getElementById('askunali-shopping-container');
@@ -18,6 +21,7 @@ async function initWidget(config, locale) {
   questionInput.setAttribute('data-placeholder', locale.placeholder);
   shoppingDescription.textContent = locale.shoppingCartDescription;
   returnButton.textContent = locale.returnButton;
+  sourcesPlaceholderText.textContent = locale.footerPlaceholder;
 
   questionInput.addEventListener('input', handleQuestionInput);
   questionInput.addEventListener('keydown', handleQuestionKeydown);
@@ -179,10 +183,13 @@ async function initWidget(config, locale) {
   }
 
   function showBasicFooter() {
+    sourcesPlaceholder.style.display = 'flex';
+    sourcesPlaceholderText.style.display = 'flex';
+    sourcesPlaceholderIcon.style.display = 'flex';
+
     const outputContainerBottom = document.querySelector('.askunali-question-output-container-bottom');
     outputContainerBottom.style.border = '1px solid var(--color-border)';
     outputContainerBottom.style.height = 'auto';
-    outputContainerBottom.style.borderTop = '35px'
   }
   
   function displayEnhancedAnswer(answer, ingredients, activities, onComplete) {
@@ -221,6 +228,10 @@ async function initWidget(config, locale) {
     const researchPaperIngredients = ingredients.filter(item => item.source === 'research_paper');
     const researchPaperActivities = activities.filter(item => item.source === 'research_paper');
     const totalSources = researchPaperIngredients.length + researchPaperActivities.length;
+
+    sourcesPlaceholder.style.display = 'flex';
+    sourcesPlaceholderText.style.display = 'flex';
+    sourcesPlaceholderIcon.style.display = 'flex';
   
     if (totalSources > 0) {
       const sourcesText = 'Sources: ';
@@ -250,14 +261,22 @@ async function initWidget(config, locale) {
       count++;
     });
   }
-
   function displayShoppingLinks(shoppingData) {
+    // Extract styles from the config object
+    const { border_color, border_radius, suggestion_background_color } = config.styles;
+  
     if (shoppingData.activities.length > 0 || shoppingData.ingredients.length > 0) {
       shoppingData.activities.forEach(item => {
         const shoppingLink = createElement('a', 'askunali-shopping-container-count', item.display_name);
         shoppingLink.href = item.link;
         shoppingLink.target = '_blank';
         shoppingLink.style.display = 'flex';
+        
+        // Apply the extracted styles
+        shoppingLink.style.borderColor = border_color;
+        shoppingLink.style.borderRadius = `${border_radius}px`;
+        shoppingLink.style.backgroundColor = suggestion_background_color;
+        
         appendElement(shoppingLinks, shoppingLink);
       });
       showElement(shoppingContainer);

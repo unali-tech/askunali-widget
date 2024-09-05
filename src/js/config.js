@@ -75,6 +75,7 @@ async function getConfig(userConfig) {
 function clearAnswer() {
   const answerContainer = document.getElementById('askunali-answer');
   const sourcesList = document.getElementById('askunali-sources');
+  const sourcesPlaceholder = document.getElementById('askunali-sources-placeholder');
   const linkElement = document.getElementById('askunali-link');
   const returnButton = document.getElementById('askunali-return-button');
   const shoppingContainer = document.getElementById('askunali-shopping-container');
@@ -85,6 +86,9 @@ function clearAnswer() {
   }
   if (sourcesList) {
     hideElement(sourcesList);
+  }
+  if (sourcesPlaceholder) {
+    hideElement(sourcesPlaceholder);
   }
   if (linkElement) {
     hideElement(linkElement);
