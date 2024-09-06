@@ -230,12 +230,12 @@ async function initWidget(config, locale) {
     const totalSources = researchPaperIngredients.length + researchPaperActivities.length;
 
     sourcesPlaceholder.style.display = 'flex';
-    sourcesPlaceholder.style.marginBottom = '10px';
     sourcesPlaceholderText.style.display = 'flex';
     sourcesPlaceholderIcon.style.display = 'flex';
     
   
     if (totalSources > 0) {
+      sourcesPlaceholder.style.marginBottom = '10px';
       const sourcesText = 'Sources: ';
       typeText(sourcesList, sourcesText, () => {
         appendSourceLinks(researchPaperIngredients, researchPaperActivities);
