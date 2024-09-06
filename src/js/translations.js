@@ -2,7 +2,7 @@ window.askUnaliTranslations = {
   en: {
     placeholder: 'Ask a question...',
     errorMessage: 'Oops! Something went wrong. Please try again later.',
-    shoppingCartDescription: 'related',
+    shoppingCartDescription: 'Related',
     returnButton: '< Return',
     processing: 'Processing',
     footerPlaceholder: '200 000 000 scientific articles',
