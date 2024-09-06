@@ -82,6 +82,20 @@ function applyStyles(styles) {
     widget.style.setProperty('--color-border', border_color);
   }
 
+  const returnButton = document.getElementById('askunali-return-button');
+  // here we need to apply the border radius to the return button
+  // also we need to apply the suggestion background color to the return button
+  // and the border color
+  if (border_radius !== undefined) {
+    returnButton.style.borderRadius = `${border_radius}px`;
+  }
+  if (suggestion_background_color) {
+    returnButton.style.backgroundColor = suggestion_background_color;
+  }
+  if (border_color) {
+    returnButton.style.borderColor = border_color;
+  }
+
   const questionInputContainer = document.querySelector('.askunali-question-input-container');
   if (question_font_color) {
     questionInputContainer.style.color = question_font_color;
