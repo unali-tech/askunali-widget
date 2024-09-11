@@ -173,7 +173,7 @@ async function initWidget(config, locale) {
       displayEnhancedAnswer(answer, ingredients, activities, () => {
         displaySources(ingredients, activities);
         displayShoppingLinks(shoppingData);
-        answerContainer.addEventListener('click', (event) => handleIngredientClick(event, ingredients, activities));
+        answerContainer.addEventListener('click', (event) => handleIngredientOrActivityClick(event, ingredients, activities));
       });
     } else {
       typeText(answerContainer, answer, showBasicFooter);
@@ -200,27 +200,52 @@ async function initWidget(config, locale) {
     const names = [...ingredients.map(item => item.ingredient_name), ...activities.map(item => item.activity_name)];
     let currentText = '';
     let index = 0;
-    const typingSpeed = 10;
-  
-    function type() {
-      if (index < answer.length) {
-        const currentChar = answer.charAt(index);
-        currentText += currentChar;
-        answerContainer.innerHTML = highlightText(currentText, names);
-        index++;
-        setTimeout(type, typingSpeed);
-      } else {
-        originalAnswer = answerContainer.innerHTML;
-        
-        const outputContainerBottom = document.querySelector('.askunali-question-output-container-bottom');
-        outputContainerBottom.style.border = '1px solid var(--color-border)';
-        outputContainerBottom.style.height = 'auto';
+    const typingSpeed = 7; // Adjust this value to control the typing speed (milliseconds per character)
+    let lastTime = Date.now();
 
-        onComplete();
-      }
+    function type() {
+        const now = Date.now();
+        const elapsed = now - lastTime;
+
+        if (elapsed > typingSpeed) {
+            if (index < answer.length) {
+                const currentChar = answer.charAt(index);
+                currentText += currentChar;
+                answerContainer.innerHTML = highlightText(currentText, names);
+                index++;
+                lastTime = now;
+            } else {
+                originalAnswer = answerContainer.innerHTML;
+
+                const outputContainerBottom = document.querySelector('.askunali-question-output-container-bottom');
+                outputContainerBottom.style.border = '1px solid var(--color-border)';
+                outputContainerBottom.style.height = 'auto';
+
+                onComplete();
+                return; // Stop the animation loop
+            }
+        }
+
+        requestAnimationFrame(type);
     }
-  
-    type();
+
+    // Use setInterval to keep track of time even when the tab is inactive
+    setInterval(() => {
+        if (index < answer.length) {
+            const now = Date.now();
+            const elapsed = now - lastTime;
+
+            if (elapsed > typingSpeed) {
+                const currentChar = answer.charAt(index);
+                currentText += currentChar;
+                answerContainer.innerHTML = highlightText(currentText, names);
+                index++;
+                lastTime = now;
+            }
+        }
+    }, typingSpeed);
+
+    requestAnimationFrame(type);
   }
   
 
@@ -233,7 +258,6 @@ async function initWidget(config, locale) {
     sourcesPlaceholderText.style.display = 'flex';
     sourcesPlaceholderIcon.style.display = 'flex';
     
-  
     if (totalSources > 0) {
       sourcesPlaceholder.style.marginBottom = '10px';
       const sourcesText = 'Sources: ';
@@ -289,18 +313,29 @@ async function initWidget(config, locale) {
     answerContainer.textContent = locale.errorMessage;
   }  
 
-  function handleIngredientClick(event, ingredients, activities) {
+  function handleIngredientOrActivityClick(event, ingredients, activities) {
     if (event.target.classList.contains('askunali-ingredient-link')) {
       event.preventDefault();
-      const ingredientName = event.target.textContent;
-      const ingredient = [...ingredients, ...activities].find(item => item.ingredient_name === ingredientName || item.activity_name === ingredientName);
-      if (ingredient) {
-        answerContainer.innerHTML = ingredient.paper_summary;
-        showElement(returnButton);
-        hideElement(shoppingContainer);
+      const clickedName = event.target.textContent;
+      const allItems = [...ingredients, ...activities];
+      const matchedItem = allItems.find(item => item.ingredient_name === clickedName || item.activity_name === clickedName);
+  
+      if (matchedItem) {
+        let summary = '';
+        if (matchedItem.source === 'research_paper') {
+          summary = matchedItem.paper_summary;
+        } else if (matchedItem.source === 'anecdotal') {
+          summary = matchedItem.anecdotal_explanation;
+        }
+  
+        if (summary) {
+          answerContainer.innerHTML = summary;
+          showElement(returnButton);
+          hideElement(shoppingContainer);
+        }
       }
     }
-  }  
+  }
 
   function handleReturnClick() {
     answerContainer.innerHTML = originalAnswer;
