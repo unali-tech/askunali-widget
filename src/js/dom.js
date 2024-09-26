@@ -8,6 +8,8 @@ async function initWidget(config, locale) {
   const sourcesPlaceholderIcon = document.getElementById('askunali-sources-placeholder-icon');
   const linkElement = document.getElementById('askunali-link');
   const returnButton = document.getElementById('askunali-return-button');
+  const dosageButton = document.getElementById('askunali-dosage-button');
+  const sideEffectsButton = document.getElementById('askunali-side-effects-button');
   const shoppingContainer = document.getElementById('askunali-shopping-container');
   const shoppingLinks = document.getElementById('askunali-shopping-links');
   const shoppingDescription = document.getElementById('askunali-shopping-cart-description');
@@ -21,6 +23,8 @@ async function initWidget(config, locale) {
   questionInput.setAttribute('data-placeholder', locale.placeholder);
   shoppingDescription.textContent = locale.shoppingCartDescription;
   returnButton.textContent = locale.returnButton;
+  dosageButton.textContent = locale.dosageButton;
+  sideEffectsButton.textContent = locale.sideEffectsButton;
   sourcesPlaceholderText.textContent = locale.footerPlaceholder;
 
   questionInput.addEventListener('input', handleQuestionInput);
@@ -28,6 +32,8 @@ async function initWidget(config, locale) {
   questionInputContainer.addEventListener('click', handleQuestionContainerClick);
   questionInput.addEventListener('mousedown', handleQuestionMousedown);
   returnButton.addEventListener('click', handleReturnClick);
+  dosageButton.addEventListener('click', handleDosageClick);
+  sideEffectsButton.addEventListener('click', handleSideEffectsClick);
   suggestionContainer.addEventListener('click', handleSuggestionClick);
   clearButtonContainer.addEventListener('click', handleClearButtonClick);
 
@@ -287,27 +293,48 @@ async function initWidget(config, locale) {
       count++;
     });
   }
+
   function displayShoppingLinks(shoppingData) {
     // Extract styles from the config object
     const { border_color, border_radius, suggestion_background_color } = config.styles;
   
-    if (shoppingData.activities.length > 0 || shoppingData.ingredients.length > 0) {
+    let hasShoppingLinks = false;
+  
+    // Display activities
+    if (shoppingData.activities.length > 0) {
       shoppingData.activities.forEach(item => {
-        const shoppingLink = createElement('a', 'askunali-shopping-container-count', item.display_name);
-        shoppingLink.href = item.link;
-        shoppingLink.target = '_blank';
-        shoppingLink.style.display = 'flex';
-        
-        // Apply the extracted styles
-        shoppingLink.style.borderColor = border_color;
-        shoppingLink.style.borderRadius = `${border_radius}px`;
-        shoppingLink.style.backgroundColor = suggestion_background_color;
-        
-        appendElement(shoppingLinks, shoppingLink);
+        createShoppingLink(item, border_color, border_radius, suggestion_background_color);
       });
+      hasShoppingLinks = true;
+    }
+  
+    // Display ingredients
+    if (shoppingData.ingredients.length > 0) {
+      shoppingData.ingredients.forEach(item => {
+        createShoppingLink(item, border_color, border_radius, suggestion_background_color);
+      });
+      hasShoppingLinks = true;
+    }
+  
+    if (hasShoppingLinks) {
       showElement(shoppingContainer);
     }
   }
+  
+  function createShoppingLink(item, border_color, border_radius, suggestion_background_color) {
+    const shoppingLink = createElement('a', 'askunali-shopping-container-count', item.display_name);
+    shoppingLink.href = item.link;
+    shoppingLink.target = '_blank';
+    shoppingLink.style.display = 'flex';
+    
+    // Apply the extracted styles
+    shoppingLink.style.borderColor = border_color;
+    shoppingLink.style.borderRadius = `${border_radius}px`;
+    shoppingLink.style.backgroundColor = suggestion_background_color;
+    
+    appendElement(shoppingLinks, shoppingLink);
+  }
+  
 
   function displayErrorMessage(locale) {
     answerContainer.textContent = locale.errorMessage;
@@ -315,35 +342,73 @@ async function initWidget(config, locale) {
 
   function handleIngredientOrActivityClick(event, ingredients, activities) {
     if (event.target.classList.contains('askunali-ingredient-link')) {
-      event.preventDefault();
-      const clickedName = event.target.textContent;
-      const allItems = [...ingredients, ...activities];
-      const matchedItem = allItems.find(item => item.ingredient_name === clickedName || item.activity_name === clickedName);
-  
-      if (matchedItem) {
-        let summary = '';
-        if (matchedItem.source === 'research_paper') {
-          summary = matchedItem.paper_summary;
-        } else if (matchedItem.source === 'anecdotal') {
-          summary = matchedItem.anecdotal_explanation;
+        event.preventDefault();
+        const clickedName = event.target.textContent;
+        const allItems = [...ingredients, ...activities];
+        const matchedItem = allItems.find(item => item.ingredient_name === clickedName || item.activity_name === clickedName);
+
+        if (matchedItem) {
+            let summary = '';
+            if (matchedItem.source === 'research_paper') {
+                summary = matchedItem.paper_summary;
+            } else if (matchedItem.source === 'anecdotal') {
+                summary = matchedItem.anecdotal_explanation;
+            }
+
+            if (summary) {
+                answerContainer.innerHTML = summary;
+                showElement(returnButton);
+
+                if (matchedItem.ingredient_name) {
+                    // Save the ingredient name in the HTML for later use
+                    dosageButton.dataset.ingredientName = matchedItem.ingredient_name;
+                    sideEffectsButton.dataset.ingredientName = matchedItem.ingredient_name;
+                    showElement(dosageButton);
+                    showElement(sideEffectsButton);
+                } else {
+                    hideElement(dosageButton);
+                    hideElement(sideEffectsButton);
+                }
+
+                hideElement(shoppingContainer);
+            }
         }
-  
-        if (summary) {
-          answerContainer.innerHTML = summary;
-          showElement(returnButton);
-          hideElement(shoppingContainer);
-        }
-      }
     }
   }
 
   function handleReturnClick() {
-    answerContainer.innerHTML = originalAnswer;
-    hideElement(returnButton);
-    
-    if (shoppingLinks.children.length > 0) {
-      showElement(shoppingContainer);
-    }
+      answerContainer.innerHTML = originalAnswer;
+      hideElement(returnButton);
+      hideElement(dosageButton);
+      hideElement(sideEffectsButton);
+
+      if (shoppingLinks.children.length > 0) {
+          showElement(shoppingContainer);
+      }
+  }
+
+  function handleDosageClick() {
+      const ingredientName = dosageButton.dataset.ingredientName;
+      if (ingredientName) {
+          const suggestedQuestion = locale.dosageQuestion.replace('[ingredient_name]', ingredientName);
+          questionInput.textContent = suggestedQuestion;
+          questionInput.classList.add('not-empty');
+          showElement(clearButtonImage);
+          showElement(questionOutputIcon);
+          handleQuestionSubmit();
+      }
+  }
+
+  function handleSideEffectsClick() {
+      const ingredientName = sideEffectsButton.dataset.ingredientName;
+      if (ingredientName) {
+          const suggestedQuestion = locale.sideEffectsQuestion.replace('[ingredient_name]', ingredientName);
+          questionInput.textContent = suggestedQuestion;
+          questionInput.classList.add('not-empty');
+          showElement(clearButtonImage);
+          showElement(questionOutputIcon);
+          handleQuestionSubmit();
+      }
   }
 }
 
