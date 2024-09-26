@@ -83,17 +83,22 @@ function applyStyles(styles) {
   }
 
   const returnButton = document.getElementById('askunali-return-button');
-  // here we need to apply the border radius to the return button
-  // also we need to apply the suggestion background color to the return button
-  // and the border color
+  const dosageButton = document.getElementById('askunali-dosage-button');
+  const sideEffectsButton = document.getElementById('askunali-side-effects-button');
   if (border_radius !== undefined) {
     returnButton.style.borderRadius = `${border_radius}px`;
+    dosageButton.style.borderRadius = `${border_radius}px`;
+    sideEffectsButton.style.borderRadius = `${border_radius}px`;
   }
   if (suggestion_background_color) {
     returnButton.style.backgroundColor = suggestion_background_color;
+    dosageButton.style.backgroundColor = suggestion_background_color;
+    sideEffectsButton.style.backgroundColor = suggestion_background_color;
   }
   if (border_color) {
     returnButton.style.borderColor = border_color;
+    dosageButton.style.borderColor = border_color;
+    sideEffectsButton.style.borderColor = border_color;
   }
 
   const questionInputContainer = document.querySelector('.askunali-question-input-container');

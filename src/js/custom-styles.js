@@ -48,6 +48,10 @@ window.askUnaliAnimationStyles = `
       padding-top: 15px !important;
     }
 
+    #askunali-widget .askunali-utility-buttons-container {
+      margin-left: 25px !important;
+    }
+
     #askunali-widget .askunali-question-output-container-bottom {
       padding-left: 25px !important;  
     }

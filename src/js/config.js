@@ -16,7 +16,6 @@ if (typeof window.askUnaliDefaultConfig === 'undefined') {
   };
 }
 
-
 async function getConfig(userConfig) {
   const defaultConfig = {
     apiKey: 'default',
@@ -78,6 +77,8 @@ function clearAnswer() {
   const sourcesPlaceholder = document.getElementById('askunali-sources-placeholder');
   const linkElement = document.getElementById('askunali-link');
   const returnButton = document.getElementById('askunali-return-button');
+  const dosageButton = document.getElementById('askunali-dosage-button');
+  const sideEffectsButton = document.getElementById('askunali-side-effects-button');
   const shoppingContainer = document.getElementById('askunali-shopping-container');
   const shoppingLinks = document.getElementById('askunali-shopping-links');
 
@@ -95,6 +96,12 @@ function clearAnswer() {
   }
   if (returnButton) {
     hideElement(returnButton);
+  }
+  if (dosageButton) {
+    hideElement(dosageButton);
+  }
+  if (sideEffectsButton) {
+    hideElement(sideEffectsButton);
   }
   if (shoppingContainer) {
     hideElement(shoppingContainer);
@@ -135,7 +142,6 @@ function resetWidget() {
     bottomContainer.style.borderRadius = '0';
   }
 }
-
 
 
 function updateApiKey(newApiKey) {
