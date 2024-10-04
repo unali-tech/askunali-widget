@@ -221,10 +221,14 @@
 
   min-width: 100px;
   width: auto;
+
+  white-space: nowrap;
+  display: inline-block;
 }
 
 #askunali-widget .askunali-utility-buttons-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
