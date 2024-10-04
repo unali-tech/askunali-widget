@@ -28,9 +28,8 @@ window.askUnaliAnimationStyles = `
       padding-left: 0px !important;
     }
 
-    
-    #askunali-widget .askunali-question-suggestion:first-child {
-      margin-left: 0px !important;
+    #askunali-widget .askunali-utility-button {
+      min-width: 0px !important;
     }
 
     #askunali-widget #askunali-question-suggestions-container {
