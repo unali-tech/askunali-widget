@@ -114,10 +114,6 @@
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-#askunali-widget .askunali-question-suggestion:first-child {
-  margin-left: 50px;
-}
-
 #askunali-widget .askunali-question-suggestion:hover {
   background-color: #E6E9F2;
   border-color: #C1D0E0;
@@ -139,6 +135,7 @@
   width: 32px;
   height: 32px;
   transform: translateY(-50%);
+  display: none;
 }
 
 #askunali-widget .askunali-question-input-area {
@@ -218,11 +215,12 @@
   border: 0.5px solid #D5E1EA;
   border-radius: var(--border-radius);
   height: 42px;
-  min-width: 100px;
-  width: auto;
   padding: 0 20px;
   margin-top: 20px;
   cursor: pointer;
+
+  min-width: 100px;
+  width: auto;
 }
 
 #askunali-widget .askunali-utility-buttons-container {
