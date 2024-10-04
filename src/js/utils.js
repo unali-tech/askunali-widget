@@ -44,8 +44,8 @@ function removeElement(element) {
   element.parentNode.removeChild(element);
 }
 
-function showElement(element) {
-  element.style.display = 'flex';
+function showElement(element, displayType = 'flex') {
+  element.style.display = displayType;
 }
 
 function hideElement(element) {

@@ -206,7 +206,7 @@
 }
 
 #askunali-widget .askunali-utility-button {
-  display: flex;
+  display: inline-block;
   justify-content: center;
   align-items: center;
   display: none;
@@ -222,7 +222,7 @@
   width: auto;
 
   white-space: nowrap;
-  display: inline-block;
+  
 }
 
 #askunali-widget .askunali-utility-buttons-container {

@@ -357,14 +357,15 @@ async function initWidget(config, locale) {
 
             if (summary) {
                 answerContainer.innerHTML = summary;
-                showElement(returnButton);
+
+                showElement(returnButton, 'inline-block');
 
                 if (matchedItem.ingredient_name) {
                     // Save the ingredient name in the HTML for later use
                     dosageButton.dataset.ingredientName = matchedItem.ingredient_name;
                     sideEffectsButton.dataset.ingredientName = matchedItem.ingredient_name;
-                    showElement(dosageButton);
-                    showElement(sideEffectsButton);
+                    showElement(dosageButton, 'inline-block');
+                    showElement(sideEffectsButton, 'inline-block');
                 } else {
                     hideElement(dosageButton);
                     hideElement(sideEffectsButton);
