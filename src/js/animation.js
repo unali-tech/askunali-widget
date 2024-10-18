@@ -2,6 +2,8 @@ let dotsInterval;
 
 function startLoadingAnimation() {
   const svg = document.getElementById('askunali-question-output-icon');
+  svg.style.display = 'flex';
+  
   const processingText = document.getElementById('askunali-processing-text');
   const language = window.askUnaliFinalConfig.language || 'en';
   const processingTranslation = window.askUnaliTranslations[language].processing;
