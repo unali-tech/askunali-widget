@@ -147,6 +147,7 @@ async function initWidget(config, locale) {
   
       const startTime = getTimestamp();
       console.log('Start time:', startTime);
+      window.amplitude.track('Question Asked', { questionText: question });
   
       fetchAnswer(question)
         .then(data => {
@@ -174,6 +175,8 @@ async function initWidget(config, locale) {
     const shoppingData = data.shopping_data;
 
     const bottomContainer = document.getElementById('askunali-bottom-container');
+
+    window.amplitude.track('Chat Message Received', { answerType: answerType, answerText: answer, shoppingData: shoppingData });
   
     if (answerType === 'enhanced') {
       displayEnhancedAnswer(answer, ingredients, activities, () => {
@@ -281,6 +284,11 @@ async function initWidget(config, locale) {
       const sourceLink = createElement('a', 'askunali-sources-count', count.toString());
       sourceLink.href = item.paper_url;
       sourceLink.target = '_blank';
+
+      sourceLink.addEventListener('click', () => {
+        window.amplitude.track('Research Paper Clicked', { paperUrl: item.paper_url });
+      });
+
       appendElement(sourcesList, sourceLink);
       count++;
     });
@@ -289,6 +297,11 @@ async function initWidget(config, locale) {
       const sourceLink = createElement('a', 'askunali-sources-count', count.toString());
       sourceLink.href = item.paper_url;
       sourceLink.target = '_blank';
+
+      sourceLink.addEventListener('click', () => {
+        window.amplitude.track('Research Paper Clicked', { paperUrl: item.paper_url });
+      });
+      
       appendElement(sourcesList, sourceLink);
       count++;
     });
@@ -326,6 +339,10 @@ async function initWidget(config, locale) {
     shoppingLink.href = item.link;
     shoppingLink.target = '_blank';
     shoppingLink.style.display = 'flex';
+
+    shoppingLink.addEventListener('click', () => {
+      window.amplitude.track('Product Clicked', { productName: item.display_name });
+    });    
     
     // Apply the extracted styles
     shoppingLink.style.borderColor = border_color;
