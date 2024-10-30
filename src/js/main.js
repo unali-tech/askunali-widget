@@ -18,6 +18,20 @@
   }
 
   function loadAmplitude() {
+    const isLocalhost = window.location.hostname === 'localhost';
+    const isNgrok = window.location.hostname.includes('ngrok');
+  
+    if (isLocalhost || isNgrok) {
+      console.log('Skipping Amplitude load on localhost or ngrok.');
+      // Create a dummy amplitude object with a no-op track method
+      window.amplitude = {
+        track: function () {
+          // No operation performed
+        }
+      };
+      return;
+    }
+  
     loadScript('https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz', function() {
       window.amplitude.init('e324eb1f472c873db23c567f3f37be38', {
         "serverZone": "EU",
@@ -26,7 +40,7 @@
   
       window.amplitude.track('App Opened');
     });
-  }
+  }  
   
 
   function loadAnimationStyles() {
