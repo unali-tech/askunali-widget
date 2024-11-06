@@ -91,7 +91,10 @@
       ...window.askUnaliConfig,
       apiKey: newApiKey,
     };
+  
     resetWidget();
+  
+    AskUnaliWidget.init(window.askUnaliConfig);
   }
 
   return {

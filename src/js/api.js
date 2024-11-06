@@ -31,7 +31,7 @@ async function fetchAnswer(question) {
   const isLocalhost = window.location.hostname === 'localhost';
 
   const apiUrl = isLocalhost 
-    ? 'https://rag-api-staging.onrender.com/ask_question' 
+    ? 'https://rag-api-test-latest.onrender.com/ask_question' 
     : 'https://rag-api-e0qu.onrender.com/ask_question';
 
   try {
