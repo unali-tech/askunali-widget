@@ -26,6 +26,38 @@ async function fetchAnswer(question) {
   }
 }
 
+async function fetchAnswer(question) {
+  const config = window.askUnaliFinalConfig;
+  const isLocalhost = window.location.hostname === 'localhost';
+
+  const apiUrl = isLocalhost 
+    ? 'https://rag-api-test-latest.onrender.com/ask_question' 
+    : 'https://rag-api-e0qu.onrender.com/ask_question';
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        question: question,
+        api_key: config.apiKey
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error in fetchAnswer:', error);
+    throw error;
+  }
+}
+
 async function fetchSuggestedQuestions(apiKey) {
   const defaultQuestions = [
     'How to manage knee pain?',
@@ -35,6 +67,11 @@ async function fetchSuggestedQuestions(apiKey) {
     'Child constipation, what to do?',
     'What is AskUnali?'
   ];
+
+  const isLocalhost = window.location.hostname === 'localhost';
+  if (isLocalhost) {
+    return defaultQuestions;
+  }
 
   try {
     const response = await fetch(`https://xybo-itpz-j8ne.p7.xano.io/api:pfjomY_8/get_suggested_questions?widget_api_key=${apiKey}`, {
@@ -64,6 +101,11 @@ async function fetchSuggestedQuestions(apiKey) {
 }
 
 async function fetchWidgetStyles(apiKey) {
+  const isLocalhost = window.location.hostname === 'localhost';
+  if (isLocalhost) {
+    return {};
+  }
+
   try {
     const response = await fetch(`https://xybo-itpz-j8ne.p7.xano.io/api:pfjomY_8/get_styles?widget_api_key=${apiKey}`, {
       method: 'GET',
@@ -97,4 +139,3 @@ async function fetchWidgetStyles(apiKey) {
     return {};
   }
 }
-

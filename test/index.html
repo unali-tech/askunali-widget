@@ -8,10 +8,8 @@
   <h1>AskUnali Widget Testing</h1>
 
   <div>
-    <button onclick="updateApiKeyToTest()">Update API Key to "test"</button>
-    <button onclick="updateApiKeyToDefault()">Update API Key to Default</button>
-    <button onclick="resetWidget()">Reset Widget</button>
-    <button onclick="installSecondInstance()">Install Second Instance</button>
+    <input type="text" id="apiKeyInput" placeholder="Enter new API key" />
+    <button onclick="updateApiKeyFromInput()">Update API Key</button>
   </div>
 
   <script>
@@ -22,22 +20,13 @@
       },
     };
 
-    function updateApiKeyToTest() {
-      AskUnaliWidget.updateApiKey('test');
-    }
-
-    function updateApiKeyToDefault() {
-      AskUnaliWidget.updateApiKey('5a69ac10-b37e-421b-90fa-ecb8398c81b2');
-    }
-
-    function resetWidget() {
-      AskUnaliWidget.resetWidget();
-    }
-
-    function installSecondInstance() {
-      var script = document.createElement('script');
-      script.src = 'widget.min.js';
-      document.body.appendChild(script);
+    function updateApiKeyFromInput() {
+      const newApiKey = document.getElementById('apiKeyInput').value;
+      if (newApiKey) {
+        // Call the updateApiKey function from config.js
+        AskUnaliWidget.updateApiKey(newApiKey);
+        console.log("updated api key")
+      }
     }
   </script>
 

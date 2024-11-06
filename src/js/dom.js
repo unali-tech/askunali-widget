@@ -171,18 +171,18 @@ async function initWidget(config, locale) {
     const answerType = data.type;
     const answer = data.answer;
     const ingredients = data.ingredients_data;
-    const activities = data.activities_data;
     const shoppingData = data.shopping_data;
+    console.log('Shopping data:', shoppingData);
 
     const bottomContainer = document.getElementById('askunali-bottom-container');
 
     window.amplitude.track('Chat Message Received', { answerType: answerType, answerText: answer, shoppingData: shoppingData });
   
     if (answerType === 'enhanced') {
-      displayEnhancedAnswer(answer, ingredients, activities, () => {
-        displaySources(ingredients, activities);
+      displayEnhancedAnswer(answer, ingredients, () => {
+        displaySources(ingredients);
         displayShoppingLinks(shoppingData);
-        answerContainer.addEventListener('click', (event) => handleIngredientOrActivityClick(event, ingredients, activities));
+        answerContainer.addEventListener('click', (event) => handleIngredientOrActivityClick(event, ingredients));
       });
     } else {
       typeText(answerContainer, answer, showBasicFooter);
@@ -201,12 +201,12 @@ async function initWidget(config, locale) {
     outputContainerBottom.style.height = 'auto';
   }
   
-  function displayEnhancedAnswer(answer, ingredients, activities, onComplete) {
+  function displayEnhancedAnswer(answer, ingredients, onComplete) {
     const bottomContainer = document.getElementById('askunali-bottom-container');
     bottomContainer.style.justifyContent = 'space-between';
     bottomContainer.style.padding = '';
 
-    const names = [...ingredients.map(item => item.ingredient_name), ...activities.map(item => item.activity_name)];
+    const names = ingredients.map(item => item.ingredient_name);
     let currentText = '';
     let index = 0;
     const typingSpeed = 7; // Adjust this value to control the typing speed (milliseconds per character)
@@ -258,10 +258,9 @@ async function initWidget(config, locale) {
   }
   
 
-  function displaySources(ingredients, activities) {
+  function displaySources(ingredients) {
     const researchPaperIngredients = ingredients.filter(item => item.source === 'research_paper');
-    const researchPaperActivities = activities.filter(item => item.source === 'research_paper');
-    const totalSources = researchPaperIngredients.length + researchPaperActivities.length;
+    const totalSources = researchPaperIngredients.length;
 
     sourcesPlaceholder.style.display = 'flex';
     sourcesPlaceholderText.style.display = 'flex';
@@ -271,13 +270,13 @@ async function initWidget(config, locale) {
       sourcesPlaceholder.style.marginBottom = '10px';
       const sourcesText = 'Sources: ';
       typeText(sourcesList, sourcesText, () => {
-        appendSourceLinks(researchPaperIngredients, researchPaperActivities);
+        appendSourceLinks(researchPaperIngredients);
         showElement(sourcesList);
       });
     }
   }  
   
-  function appendSourceLinks(ingredients, activities) {
+  function appendSourceLinks(ingredients) {
     let count = 1;
   
     ingredients.forEach(item => {
@@ -289,19 +288,6 @@ async function initWidget(config, locale) {
         window.amplitude.track('Research Paper Clicked', { paperUrl: item.paper_url });
       });
 
-      appendElement(sourcesList, sourceLink);
-      count++;
-    });
-  
-    activities.forEach(item => {
-      const sourceLink = createElement('a', 'askunali-sources-count', count.toString());
-      sourceLink.href = item.paper_url;
-      sourceLink.target = '_blank';
-
-      sourceLink.addEventListener('click', () => {
-        window.amplitude.track('Research Paper Clicked', { paperUrl: item.paper_url });
-      });
-      
       appendElement(sourcesList, sourceLink);
       count++;
     });
@@ -357,12 +343,12 @@ async function initWidget(config, locale) {
     answerContainer.textContent = locale.errorMessage;
   }  
 
-  function handleIngredientOrActivityClick(event, ingredients, activities) {
+  function handleIngredientOrActivityClick(event, ingredients) {
     if (event.target.classList.contains('askunali-ingredient-link')) {
         event.preventDefault();
         const clickedName = event.target.textContent;
-        const allItems = [...ingredients, ...activities];
-        const matchedItem = allItems.find(item => item.ingredient_name === clickedName || item.activity_name === clickedName);
+        const allItems = [...ingredients];
+        const matchedItem = allItems.find(item => item.ingredient_name === clickedName);
 
         if (matchedItem) {
             let summary = '';

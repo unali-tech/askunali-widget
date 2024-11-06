@@ -143,11 +143,3 @@ function resetWidget() {
   }
 }
 
-
-function updateApiKey(newApiKey) {
-  window.askUnaliConfig = {
-    ...window.askUnaliConfig,
-    apiKey: newApiKey,
-  };
-  resetWidget();
-}
