@@ -19,6 +19,7 @@ if (typeof window.askUnaliDefaultConfig === 'undefined') {
 async function getConfig(userConfig) {
   const defaultConfig = {
     apiKey: 'default',
+    apiUrl: null,
     styles: {
       border_color: '#D0DDE8',
       border_radius: '4px',
