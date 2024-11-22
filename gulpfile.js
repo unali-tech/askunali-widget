@@ -81,7 +81,9 @@ gulp.task('clean', function() {
 gulp.task('copy-widget', function() {
     return gulp.src('./dist/widget.min.js')
         .pipe(gulp.dest('../expert_portal_reboot/public/'))
-        .pipe(gulp.dest('./test/'));
+        .pipe(gulp.dest('./test/'))
+        .pipe(gulp.dest('../rag_api/data/static/'));
 });
+
 
 gulp.task('default', gulp.series('inline-css', 'inline-source', 'inject-html', 'bundle-js', 'clean', 'copy-widget'));
