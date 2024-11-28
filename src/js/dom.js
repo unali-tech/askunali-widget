@@ -273,6 +273,8 @@ async function initWidget(config, locale) {
         appendSourceLinks(researchPaperIngredients);
         showElement(sourcesList);
       });
+    } else {
+      sourcesPlaceholder.style.marginBottom = '30px';
     }
   }  
   
